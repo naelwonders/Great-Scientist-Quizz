@@ -1,0 +1,34 @@
+{
+    "questions": [
+        {
+            "title": "I am one of the most\nfamous female scientist... ",
+            "answer": ["Marie Curie", "Eleonore Paprika", "Géraldine Poivrette"],
+            "goodAnswer": 0,
+            "bio": "quelques mots"
+        },
+        {
+            "title": "I took the first picture\nof DNA...?",
+            "answer": ["Fleur Adamson", "Rosalind Franklin", "Lilly Allen"],
+            "goodAnswer": 1,
+            "bio": "quelques mots"
+        },
+        {
+            "title": "Sans moi, la mission Apollo 11 aurait échoué.\n Qui suis-je ?",
+            "answer": ["What's", " her", "name"],
+            "goodAnswer": 0,
+            "bio": "quelques mots"
+        },
+        {
+            "title": "Le wifi, c'est grace à moi.\n Qui suis-je ?",
+            "answer": ["Woody Allen", "Guillermo Del Toro", "Pedro Almodovar"],
+            "goodAnswer": 2,
+            "bio": "quelques mots"
+        },
+        {
+            "title": "J'ai inventé le concepte de programmation avant même les ordinateurs.\n Qui suis-je ?",
+            "answer": ["Eddie Hatestick", "Emma Watson", "Ada Lovelace"],
+            "goodAnswer": 2,
+            "bio": "quelques mots"
+        }
+  ]
+}
