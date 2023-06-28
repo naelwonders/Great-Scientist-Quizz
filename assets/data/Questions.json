@@ -1,34 +1,27 @@
 {
     "questions": [
         {
-            "title": "I am one of the most\nfamous female scientist... ",
+            "title": "I am the first woman to win\na Nobel Prize in 1911... ",
             "answer": ["Marie Curie", "Eleonore Paprika", "Géraldine Poivrette"],
             "goodAnswer": 0,
-            "bio": "quelques mots"
+            "bio": "Physicist and chemist\nShe discovered radioactivity and invented\na mobile X-ray unit that was used during World War I.",
+            "photoCredit": "Picture credit : Internet Archive Book Images/Flickr Commons "
         },
         {
-            "title": "I took the first picture\nof DNA...?",
+            "title": "Watson and Crick discovered\nthe molecular structure of DNA because of some pictures I took...",
             "answer": ["Fleur Adamson", "Rosalind Franklin", "Lilly Allen"],
             "goodAnswer": 1,
-            "bio": "quelques mots"
+            "bio": "***Chemist\nShe took the first picture\nof DNA using X-ray crystallography.\nThis lead to the discovery the\ndouble helix.",
+            "photoCredit": "Picture credit : MRC Laboratory of Molecular Biology"
         },
         {
-            "title": "Sans moi, la mission Apollo 11 aurait échoué.\n Qui suis-je ?",
-            "answer": ["What's", " her", "name"],
-            "goodAnswer": 0,
-            "bio": "quelques mots"
-        },
-        {
-            "title": "Le wifi, c'est grace à moi.\n Qui suis-je ?",
-            "answer": ["Woody Allen", "Guillermo Del Toro", "Pedro Almodovar"],
-            "goodAnswer": 2,
-            "bio": "quelques mots"
-        },
-        {
-            "title": "J'ai inventé le concepte de programmation avant même les ordinateurs.\n Qui suis-je ?",
-            "answer": ["Eddie Hatestick", "Emma Watson", "Ada Lovelace"],
-            "goodAnswer": 2,
-            "bio": "quelques mots"
+            "title": "I am the first woman to work\nat NASA as a mathematician..",
+            "answer": ["What's", " Katherine Johnson", "name"],
+            "goodAnswer": 1,
+            "bio": "Mathematician\nIN PROGRESS:\nSans moi, les astraunautes de la\nmission pollo 13 n'aurait pas survecus",
+            "photoCredit": "Picture credit : INTERNET "
         }
+       
+      
   ]
 }

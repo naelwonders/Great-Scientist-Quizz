@@ -1,17 +1,46 @@
 
 
 {
-    "question" : [
+    "questions": [
         {
-        "title" : "Quel célèbre dictateur dirigera  l'URSS du milieu des années 1920 à 1953?",
-        "correctAnswer" : 1,
-        "answers" : ["Stalin", "Lenin", "Stromae"]   
+            "title": "I am the first woman to win a Nobel Prize in 1911... ",
+            "answer": ["Marie Curie", "Eleonore Paprika", "Géraldine Poivrette"],
+            "goodAnswer": 0,
+            "bio": "Physicist and chemist\nShe discovered radioactivity and invented\na mobile X-ray unit that was used during World War I.",
+            "photoImage": "PSEUDOOOOO of the namefile",
+            "photoCredit": "Picture credit : Internet Archive Book Images/Flickr Commons "
         },
-
         {
-        "title" : "Une autre question ??",
-        "correctAnswer" : 3,
-        "answers" : ["Clickez ici.", "C'est ici :)", "Moi, moi, moi!"]   
+            "title": "Watson and Crick discovered the molecular structure of DNA because of some pictures I took...",
+            "answer": ["Fleur Adamson", "Rosalind Franklin", "Lilly Allen"],
+            "goodAnswer": 1,
+            "bio": "***Chemist\nShe took the first picture of DNA\nusing X-ray crystallography. This lead\nto the discovery of DNA's double helix structure.",
+            "photoImage": "PSEUDOOOOO of the namefile",
+            "photoCredit": "Picture credit : MRC Laboratory of Molecular Biology"
+        },
+        {
+            "title": "I am the first woman toI created a mSans moi, les astraunautes de la\nmission pollo 13 n'aurait pas survecu\n.\n Qui suis-je ?",
+            "answer": ["What's", " Katherine Johnson", "name"],
+            "goodAnswer": 0,
+            "bio": "Mathematician\nIN PROGRESS",
+            "photoImage": "PSEUDO of the namefile",
+            "photoCredit": "Picture credit : INTERNET "
+        },
+        {
+            "title": "Le wifi, c'est grace à moi.\n Qui suis-je ?",
+            "answer": ["Woody Allen", "Guillermo Del Toro", "Pedro Almodovar"],
+            "goodAnswer": 2,
+            "bio": "quelques mots",
+            "photoImage": "pseudo of the namefile",
+            "photoCredit": "Picture credit : "
+        },
+        {
+            "title": "J'ai inventé le concepte de programmation avant même les ordinateurs.\n Qui suis-je ?",
+            "answer": ["Eddie Hatestick", "Emma Watson", "Ada Lovelace"],
+            "goodAnswer": 2,
+            "bio": "Mathematician and writer\nShe is the first computer programmer \n— long before modern computers were invented.",
+            "photoImage": "pseudo of the namefile",
+            "photoCredit": "Picture credit : "
         }
-    ]
+  ]
 }
