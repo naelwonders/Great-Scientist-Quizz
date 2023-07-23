@@ -1,3 +1,5 @@
+//SMALL PROJECT IN MY LEARNING JOURNEY
+
 let config = {
     type: Phaser.AUTO,
     width: 600,
@@ -24,7 +26,7 @@ let score = 0;
 let moreInfoCat;
 let scientistImage;
 let rectangle;
-let numberOfQuestions = 5;
+let numberOfQuestions = 4;
 
 
 function preload() {
@@ -41,6 +43,7 @@ function preload() {
     this.load.image('scientist1', '../assets/Sprites/lamarr.png');
     this.load.image('scientist2', '../assets/Sprites/franklin.png');
     this.load.image('scientist3', '../assets/Sprites/lovelace.png');
+    
     //telecharger le fichier JSON
     this.load.json('questions', './assets/data/Questions.json');
    
@@ -66,7 +69,17 @@ function create() {
         color: '#000000'}
         );
     
-    //le bouton pour passer à la prochaine question, le currentIndex est incrémenté
+    scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
+    scientistImage.setOrigin(0,0);
+    scientistImage.setVisible(false);
+    
+    // A REVOIR
+    rectangle = this.add.graphics();
+    rectangle.fillStyle(0x000000, 1); // Set fill color to red
+    //rectangle.setOrigin(0.5,0.5);
+    rectangle.setVisible(false);
+    
+    //le bouton (invisible tant que pas repondu) pour passer à la prochaine question, le currentIndex est incrémenté dans la fonction next question
     playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
     playButton.on('pointerdown', nextQuestion)
     playButton.setScale(0.4)
@@ -85,24 +98,15 @@ function create() {
         answerText[i] = this.add.text(170,(config.height * 0.23) + (110 *(i + 1)), choice, {fontfamily: 'Arial', fontSize: 24, color: '#000000'});
         }   
     
-    //les signes qui indique l'overview des bonne/mauvais reponse en bas du jeu
-    for (let i = 0; i < 5; i++) {
+    //les signes qui indiquent l'overview des bonnes/mauvaises reponses en bas du jeu
+    for (let i = 0; i < numberOfQuestions; i++) {
         fist = this.add.image((config.width / 7) + (i * 110) - 5, config.height - 50, 'fist');
         fist.setScale(0.1);
         fist.alpha = 0;
         fists[i] = fist;
     }
     
-    //the picture of the scientist is already there but invisible
-    scientistImage = this.add.image(0,0,"scientist"+[currentIndex])
-    scientistImage.setOrigin(0,0);
-    scientistImage.setVisible(false);
-
-    rectangle = this.add.graphics();
-    rectangle.fillStyle(0x000000, 1); // Set fill color to red
-    //rectangle.setOrigin(0.5,0.5);
-    rectangle.setVisible(false);
-
+    //when you click on the cat, the picture of the correct scientist appears
     //add an interactive information car icon for clicking and getting more info on the scientist (picture and text)
     moreInfoCat = this.add.image(1000,1000, 'moreInfoCat').setInteractive();  //hide it by putting it far
     moreInfoCat.setScale(0.2);
@@ -132,6 +136,7 @@ function checkAnswer(indexAnswer) {
     else {
         fists[currentIndex].alpha = 0.3;
     }
+
     moreInfoCat.setVisible(true)
     moreInfoCat.setPosition(answerPanel[questionJSON.questions[currentIndex].goodAnswer].x - 210, answerPanel[questionJSON.questions[currentIndex].goodAnswer].y);
     answerText[questionJSON.questions[currentIndex].goodAnswer].setColor("#00ff00")
@@ -144,20 +149,29 @@ function nextQuestion () {
     currentIndex ++;
     playButton.setVisible(false)
     moreInfoCat.setVisible(false)
+
+    //that code is repeated !!
     if (currentIndex < numberOfQuestions) {
-        questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme
+        questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
         
+        // C'ETAIT ICI MON ERREUR !!!
+        scientistImage.setTexture('scientist' + currentIndex.toString());
+        scientistImage.setVisible(false);
+        
+        //ajout des prochaines réponses
         for (let i = 0; i < numberOfQuestions; i++) {
             answerText[i].text = questionJSON.questions[currentIndex].answer[i];
             answerText[i].setColor("#000000");
             answerPanel[i].setInteractive();
         }
+
     }
+    //après la derniere question
     else {
         //set everything invisible and annouce the score
         questionText.text = "Vous avez un score de "+score+"/"+numberOfQuestions+"!";
         for (let i = 0; i < numberOfQuestions; i++) {
-            answerText[i].text = "";
+            answerText[i].text = ""; 
             answerPanel[i].setVisible(false);
         }
     }
@@ -165,9 +179,9 @@ function nextQuestion () {
 
 function getBio() {
     //add the photo on top of the game
-    scientistImage.setVisible(true);
-    rectangle.setVisible(true);
-    moreInfoCat.setVisible(false);
     
+        scientistImage.setVisible(true);
+        rectangle.setVisible(true);
+        moreInfoCat.setVisible(false);
 }
 
