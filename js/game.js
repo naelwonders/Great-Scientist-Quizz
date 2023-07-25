@@ -6,7 +6,7 @@ let config = {
     type: Phaser.AUTO,
     width: 600,
     height: 640,
-    backgroundColor: '#F70776', //C3195D for darker pink; for a bordeauish; and black go well together
+    backgroundColor: '#df0e62',
     physics: {
         default: 'arcade'
     },
@@ -61,9 +61,9 @@ function create() {
     //titre en haut de chaque question
     title = this.add.text(config.width / 2, 100, "GUESS WHO", 
         {fontFamily: 'Impact', 
-        fontSize: 80, 
+        fontSize: 100, 
         fontStyle: 'bold',
-        color: '#000000'});
+        color: '#fac70b'});
     title.setOrigin(0.5,0.5);
     
     //texte pour la question
@@ -72,7 +72,7 @@ function create() {
         {fontFamily: 'Oswald', 
         fontSize: 30, 
         fontStyle: 'bold',
-        color: '#000000'}
+        color: '#127681'}
         );
     
         
@@ -84,11 +84,11 @@ function create() {
             //les panneaux de reponse sont interactives
             answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + (100 *(i + 1)), 'answer').setInteractive();
             answerPanel[i].on('pointerdown', () => {checkAnswer(i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
-            answerPanel[i].alpha = 0.3;
+            answerPanel[i].alpha = 0.1;
             answerPanel[i].setScale(0.9);
             
             //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
-            answerText[i] = this.add.text(config.width/2,(config.height * 0.3) + (100 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: '#000000'});
+            answerText[i] = this.add.text(config.width/2,(config.height * 0.3) + (100 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: '#21174a'});
             answerText[i].setOrigin(0.5, 0.5);
         }   
     
