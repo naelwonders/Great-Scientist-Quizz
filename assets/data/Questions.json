@@ -1,27 +1,34 @@
 {
     "questions": [
         {
-            "title": "I am the first woman to win\na Nobel Prize in 1911... ",
+            "title": "I am the first woman to win a Nobel\nPrize in 1911... ",
             "answer": ["Marie Curie", "Eleonore Paprika", "Géraldine Poivrette"],
             "goodAnswer": 0,
-            "bio": "Physicist and chemist\nShe discovered radioactivity and invented\na mobile X-ray unit that was used during World War I.",
-            "photoCredit": "Picture credit : Internet Archive Book Images/Flickr Commons "
+            "bio": "Physicist and chemist\nShe discovered radioactivity and invented\na mobile X-ray unit that was used during World War I."
         },
         {
             "title": "Watson and Crick discovered\nthe molecular structure of DNA because of some pictures I took...",
             "answer": ["Fleur Adamson", "Rosalind Franklin", "Lilly Allen"],
             "goodAnswer": 1,
-            "bio": "***Chemist\nShe took the first picture\nof DNA using X-ray crystallography.\nThis lead to the discovery the\ndouble helix.",
-            "photoCredit": "Picture credit : MRC Laboratory of Molecular Biology"
+            "bio": "***Chemist\nShe took the first picture\nof DNA using X-ray crystallography.\nThis lead to the discovery the\ndouble helix."
         },
         {
             "title": "I am the first woman to work\nat NASA as a mathematician..",
-            "answer": ["What's", " Katherine Johnson", "name"],
+            "answer": ["Kelly Thomson", "Katherine Johnson", "Your granny"],
             "goodAnswer": 1,
-            "bio": "Mathematician\nIN PROGRESS:\nSans moi, les astraunautes de la\nmission pollo 13 n'aurait pas survecus",
-            "photoCredit": "Picture credit : INTERNET "
+            "bio": "Mathematician\nIN PROGRESS:\nSans moi, les astraunautes de la\nmission pollo 13 n'aurait pas survecus"
+        },
+        {
+            "title": "I am invented programming...\nbefore computers existed.",
+            "answer": ["Luna Lovegood", "Goodie Osborn", "Ada Lovelace"],
+            "goodAnswer": 2,
+            "bio": "WHAT IS SHE\nIN PROGRESS:\n...."
+        },
+        {
+            "title": "I am starrrrr...\nand I invented wifi...",
+            "answer": ["Hedy Lamarr", "Kate Winslet", "Lady Gaga"],
+            "goodAnswer": 0,
+            "bio": "Actress and Scientist\nIN PROGRESS:\n...."
         }
-       
-      
   ]
 }

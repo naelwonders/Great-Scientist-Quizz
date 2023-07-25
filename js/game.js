@@ -1,10 +1,12 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY
 
+//BUGG: when the last picture is shown, the score does not appear when I press the play button (should show the score)
+
 let config = {
     type: Phaser.AUTO,
     width: 600,
     height: 640,
-    backgroundColor: '#a52fbc',
+    backgroundColor: '#F70776', //C3195D for darker pink; for a bordeauish; and black go well together
     physics: {
         default: 'arcade'
     },
@@ -26,7 +28,7 @@ let score = 0;
 let moreInfoCat;
 let scientistImage;
 let rectangle;
-let numberOfQuestions = 4;
+let numberOfQuestions;
 
 
 function preload() {
@@ -40,9 +42,10 @@ function preload() {
     //images and assets for the more info file page
     this.load.image('moreInfoCat', '../assets/Sprites/cat.png');
     this.load.image('scientist0', '../assets/Sprites/curie.png');
-    this.load.image('scientist1', '../assets/Sprites/lamarr.png');
-    this.load.image('scientist2', '../assets/Sprites/franklin.png');
+    this.load.image('scientist1', '../assets/Sprites/franklin.png');
+    this.load.image('scientist2', '../assets/Sprites/johnson.png');
     this.load.image('scientist3', '../assets/Sprites/lovelace.png');
+    this.load.image('scientist4', '../assets/Sprites/lamarr.png');
     
     //telecharger le fichier JSON
     this.load.json('questions', './assets/data/Questions.json');
@@ -53,49 +56,40 @@ function create() {
 
     // faire le lien avec le fichier JSON et cette page
     questionJSON = this.cache.json.get('questions');
+    numberOfQuestions = questionJSON.questions.length;
     
     //titre en haut de chaque question
-    title = this.add.text(50, 60, "WHO AM I ??", 
-        {fontfamily: 'Arial', 
+    title = this.add.text(config.width / 2, 100, "GUESS WHO", 
+        {fontFamily: 'Impact', 
         fontSize: 80, 
         fontStyle: 'bold',
         color: '#000000'});
+    title.setOrigin(0.5,0.5);
     
     //texte pour la question
+    //SOLUTION pour  avoir la question instalée dynamiquement: splitter la chaine de character en tous les x character et set origin au centre (0.5,0.5)
     questionText = this.add.text(50,config.height / 3 -50, questionJSON.questions[currentIndex].title, 
-        {fontfamily: 'Arial', 
+        {fontFamily: 'Oswald', 
         fontSize: 30, 
         fontStyle: 'bold',
         color: '#000000'}
         );
     
-    scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
-    scientistImage.setOrigin(0,0);
-    scientistImage.setVisible(false);
-    
-    // A REVOIR
-    rectangle = this.add.graphics();
-    rectangle.fillStyle(0x000000, 1); // Set fill color to red
-    //rectangle.setOrigin(0.5,0.5);
-    rectangle.setVisible(false);
-    
-    //le bouton (invisible tant que pas repondu) pour passer à la prochaine question, le currentIndex est incrémenté dans la fonction next question
-    playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
-    playButton.on('pointerdown', nextQuestion)
-    playButton.setScale(0.4)
-    playButton.setVisible(false)
         
-    for (let i = 0; i < 3; i++) 
+        
+        for (let i = 0; i < 3; i++) 
         {
-        choice = questionJSON.questions[currentIndex].answer[i]
-        
-        //les panneaux de reponse sont interactives
-        answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.25) + (110 *(i + 1)), 'answer').setInteractive();
-        answerPanel[i].on('pointerdown', () => {checkAnswer(i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
-        answerPanel[i].alpha = 0.3;
-        
-        //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
-        answerText[i] = this.add.text(170,(config.height * 0.23) + (110 *(i + 1)), choice, {fontfamily: 'Arial', fontSize: 24, color: '#000000'});
+            choice = questionJSON.questions[currentIndex].answer[i]
+            
+            //les panneaux de reponse sont interactives
+            answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + (100 *(i + 1)), 'answer').setInteractive();
+            answerPanel[i].on('pointerdown', () => {checkAnswer(i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
+            answerPanel[i].alpha = 0.3;
+            answerPanel[i].setScale(0.9);
+            
+            //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
+            answerText[i] = this.add.text(config.width/2,(config.height * 0.3) + (100 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: '#000000'});
+            answerText[i].setOrigin(0.5, 0.5);
         }   
     
     //les signes qui indiquent l'overview des bonnes/mauvaises reponses en bas du jeu
@@ -113,11 +107,24 @@ function create() {
     //when I click on the moreInfo cat, the bio will appear on screen
     moreInfoCat.on('pointerdown',()=> { getBio() })
     
+    scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
+    scientistImage.setOrigin(0,0);
+    scientistImage.setVisible(false);
+    
+    //le bouton (invisible tant que pas repondu) pour passer à la prochaine question avec la fonction: nextQuestion
+    playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
+    playButton.on('pointerdown', nextQuestion)
+    playButton.setScale(0.4)
+    playButton.setVisible(false)
+    // A REVOIR
+    rectangle = this.add.graphics();
+    rectangle.fillStyle(0x000000, 1); // Set fill color to red
+    //rectangle.setOrigin(0.5,0.5);
+    rectangle.setVisible(false);
 }
 
-
 function update() {
-// on a pas eu besoin de l'update car on est sur de l'evenementiel
+    // on a pas eu besoin de l'update car on est sur de l'evenementiel
 }
 
 //mettre des couleurs en fonction des bonnes/mauvaises reponses
@@ -143,12 +150,12 @@ function checkAnswer(indexAnswer) {
     playButton.setVisible(true)
     }
 
-
 function nextQuestion () {
     
     currentIndex ++;
     playButton.setVisible(false)
     moreInfoCat.setVisible(false)
+    scientistImage.setVisible(false);
 
     //that code is repeated !!
     if (currentIndex < numberOfQuestions) {
@@ -170,6 +177,8 @@ function nextQuestion () {
     else {
         //set everything invisible and annouce the score
         questionText.text = "Vous avez un score de "+score+"/"+numberOfQuestions+"!";
+        questionText.setPosition(config.width/ 2, config.height / 2);
+        questionText.setOrigin(0.5, 0.5);
         for (let i = 0; i < numberOfQuestions; i++) {
             answerText[i].text = ""; 
             answerPanel[i].setVisible(false);
@@ -184,4 +193,3 @@ function getBio() {
         rectangle.setVisible(true);
         moreInfoCat.setVisible(false);
 }
-
