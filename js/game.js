@@ -1,6 +1,9 @@
-//SMALL PROJECT IN MY LEARNING JOURNEY
+//SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
 
-//BUGG: when the last picture is shown, the score does not appear when I press the play button (should show the score)
+//To do:
+//add a button to go back after pressing the hint (instead of next question)
+//fix the text by splitting into n characters (question and hint so make it a function)
+//take care of the esthetics
 
 let config = {
     type: Phaser.AUTO,
@@ -29,6 +32,7 @@ let moreInfoCat;
 let scientistImage;
 let rectangle;
 let numberOfQuestions;
+let hint, bioHint;
 
 
 function preload() {
@@ -74,23 +78,22 @@ function create() {
         fontStyle: 'bold',
         color: '#127681'}
         );
-    
+           
         
+    for (let i = 0; i < 3; i++) 
+    {
+        choice = questionJSON.questions[currentIndex].answer[i]
         
-        for (let i = 0; i < 3; i++) 
-        {
-            choice = questionJSON.questions[currentIndex].answer[i]
-            
-            //les panneaux de reponse sont interactives
-            answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + (100 *(i + 1)), 'answer').setInteractive();
-            answerPanel[i].on('pointerdown', () => {checkAnswer(i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
-            answerPanel[i].alpha = 0.1;
-            answerPanel[i].setScale(0.9);
-            
-            //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
-            answerText[i] = this.add.text(config.width/2,(config.height * 0.3) + (100 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: '#21174a'});
-            answerText[i].setOrigin(0.5, 0.5);
-        }   
+        //les panneaux de reponse sont interactives
+        answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), 'answer').setInteractive();
+        answerPanel[i].on('pointerdown', () => {checkAnswer(i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
+        answerPanel[i].alpha = 0.1;
+        answerPanel[i].setScale(0.9);
+        
+        //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
+        answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: '#000000'});
+        answerText[i].setOrigin(0.5, 0.5);
+    }   
     
     //les signes qui indiquent l'overview des bonnes/mauvaises reponses en bas du jeu
     for (let i = 0; i < numberOfQuestions; i++) {
@@ -102,10 +105,18 @@ function create() {
     
     //when you click on the cat, the picture of the correct scientist appears
     //add an interactive information car icon for clicking and getting more info on the scientist (picture and text)
-    moreInfoCat = this.add.image(1000,1000, 'moreInfoCat').setInteractive();  //hide it by putting it far
-    moreInfoCat.setScale(0.2);
+    moreInfoCat = this.add.image(100,(config.height / 2) + 70, 'moreInfoCat').setInteractive();  //hide it by putting it far
+    //moreInfoCat.setVisible(false);
+    moreInfoCat.setScale(0.3);
     //when I click on the moreInfo cat, the bio will appear on screen
-    moreInfoCat.on('pointerdown',()=> { getBio() })
+    moreInfoCat.on('pointerdown',()=> { getHint() })
+    
+    hint = this.add.text(70, (config.height / 2) + 50, "Click here\n for a hint", 
+        {fontFamily: 'Impact', 
+        fontSize: 20, 
+        color: '#fac70b'});
+    title.setOrigin(0.5,0.5);
+
     
     scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
     scientistImage.setOrigin(0,0);
@@ -118,9 +129,20 @@ function create() {
     playButton.setVisible(false)
     // A REVOIR
     rectangle = this.add.graphics();
-    rectangle.fillStyle(0x000000, 1); // Set fill color to red
-    //rectangle.setOrigin(0.5,0.5);
+    // Draw a rectangle shape using the fill style
+    rectangle.fillStyle(0x000000, 1); // Set fill color to red, alpha 1
+    // The arguments are (x, y, width, height, radius of the rounded edges)
+    let widthRectangle = 400;
+    let lengthRectangle = 150;
+    rectangle.fillRoundedRect((config.width/2) - (widthRectangle / 2), 450, widthRectangle, lengthRectangle, 20); //setOrigin does not work with rect so use the size of the rect to determine its position
     rectangle.setVisible(false);
+    
+    //TO DO: place the bioHinT better
+    bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, questionJSON.questions[currentIndex].bio, 
+        {fontFamily: 'Impact', 
+        fontSize: 20, 
+        color: '#fac70b'});
+    bioHint.setVisible(false);
 }
 
 function update() {
@@ -144,26 +166,30 @@ function checkAnswer(indexAnswer) {
         fists[currentIndex].alpha = 0.3;
     }
 
-    moreInfoCat.setVisible(true)
-    moreInfoCat.setPosition(answerPanel[questionJSON.questions[currentIndex].goodAnswer].x - 210, answerPanel[questionJSON.questions[currentIndex].goodAnswer].y);
-    answerText[questionJSON.questions[currentIndex].goodAnswer].setColor("#00ff00")
-    playButton.setVisible(true)
-    }
+    moreInfoCat.setVisible(false);
+    hint.setVisible(false)
+    answerText[questionJSON.questions[currentIndex].goodAnswer].setColor("#00ff00");
+    playButton.setVisible(true);
+}
 
 function nextQuestion () {
     
     currentIndex ++;
     playButton.setVisible(false)
-    moreInfoCat.setVisible(false)
     scientistImage.setVisible(false);
-
+    rectangle.setVisible(false);
+    bioHint.setVisible(false);
+    
     //that code is repeated !!
     if (currentIndex < numberOfQuestions) {
+        moreInfoCat.setVisible(true);
+        hint.setVisible(true);
+
         questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
         
         // C'ETAIT ICI MON ERREUR !!!
-        scientistImage.setTexture('scientist' + currentIndex.toString());
-        scientistImage.setVisible(false);
+        scientistImage.setTexture('scientist' + currentIndex.toString());   
+        bioHint.text = questionJSON.questions[currentIndex].bio;     
         
         //ajout des prochaines réponses
         for (let i = 0; i < numberOfQuestions; i++) {
@@ -175,6 +201,8 @@ function nextQuestion () {
     }
     //après la derniere question
     else {
+        moreInfoCat.setVisible(false);
+        hint.setVisible(false);
         //set everything invisible and annouce the score
         questionText.text = "Vous avez un score de "+score+"/"+numberOfQuestions+"!";
         questionText.setPosition(config.width/ 2, config.height / 2);
@@ -186,10 +214,10 @@ function nextQuestion () {
     }
 }
 
-function getBio() {
-    //add the photo on top of the game
-    
-        scientistImage.setVisible(true);
-        rectangle.setVisible(true);
-        moreInfoCat.setVisible(false);
+function getHint() {
+    scientistImage.setVisible(true);
+    rectangle.setVisible(true);
+    bioHint.setVisible(true);
+    moreInfoCat.setVisible(false);
+    playButton.setVisible(true);
 }
