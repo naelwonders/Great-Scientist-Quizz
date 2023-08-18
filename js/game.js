@@ -3,13 +3,13 @@
 //To do:
 //add a button to go back after pressing the hint (instead of next question)
 //fix the text by splitting into n characters (question and hint so make it a function)
-//take care of the esthetics
+//take care of the esthetics (chat GTP)
 
 let config = {
     type: Phaser.AUTO,
     width: 600,
     height: 640,
-    backgroundColor: '#df0e62',
+    backgroundColor: "#322E4F", //Dark Enigma
     physics: {
         default: 'arcade'
     },
@@ -34,12 +34,18 @@ let rectangle;
 let numberOfQuestions;
 let hint, bioHint;
 
+let textColor = "#F4E3D7" // Ethereal Parchment
+let backgroundColor = "#322E4F" //Dark Enigma
+let purpleColor = "#655872" //Mystic Purple
+let buttonColor = "#9D8AA5" //Twilight Lavender
+let accentColor = "#D4AF37" //Golden Alchemy
+
 
 function preload() {
     //attention un folder qui s'appelle Sprite ne marchera pas sur ichio (je sais pas pourquoi though)
     //this.load.image('background', '../assets/Sprites/background.png');
     this.load.image('question', '../assets/Sprites/Label1.png');
-    this.load.image('answer', '../assets/Sprites/Label4.png');
+    this.load.image('answer', '../assets/Sprites/marble_brick_curved.png');
     this.load.image('fist', '../assets/Sprites/fist.png');
     this.load.image('playButton', '../assets/Sprites/Play.png');
 
@@ -63,11 +69,11 @@ function create() {
     numberOfQuestions = questionJSON.questions.length;
     
     //titre en haut de chaque question
-    title = this.add.text(config.width / 2, 100, "GUESS WHO", 
-        {fontFamily: 'Impact', 
-        fontSize: 100, 
+    title = this.add.text(config.width / 2, 100, "Great Scientists", 
+        {fontFamily: 'Old English Text MT', 
+        fontSize: 70, 
         fontStyle: 'bold',
-        color: '#fac70b'});
+        color: purpleColor});
     title.setOrigin(0.5,0.5);
     
     //texte pour la question
@@ -76,7 +82,7 @@ function create() {
         {fontFamily: 'Oswald', 
         fontSize: 30, 
         fontStyle: 'bold',
-        color: '#127681'}
+        color: textColor}
         );
            
         
@@ -87,11 +93,11 @@ function create() {
         //les panneaux de reponse sont interactives
         answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), 'answer').setInteractive();
         answerPanel[i].on('pointerdown', () => {checkAnswer(i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
-        answerPanel[i].alpha = 0.1;
-        answerPanel[i].setScale(0.9);
+        answerPanel[i].alpha = 0.5;
+        answerPanel[i].setScale(0.7);
         
         //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
-        answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: '#000000'});
+        answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: purpleColor});
         answerText[i].setOrigin(0.5, 0.5);
     }   
     
@@ -114,7 +120,7 @@ function create() {
     hint = this.add.text(70, (config.height / 2) + 50, "Click here\n for a hint", 
         {fontFamily: 'Impact', 
         fontSize: 20, 
-        color: '#fac70b'});
+        color: accentColor});
     title.setOrigin(0.5,0.5);
 
     
