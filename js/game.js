@@ -1,8 +1,9 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
 
 //To do:
-//add a button to go back after pressing the hint (instead of next question)
 //fix the text by splitting into n characters (question and hint so make it a function)
+//add a button to go back after pressing the hint (instead of next question)
+//fontFamily: 'Old English Text MT' not supported in all browsers
 //take care of the esthetics (chat GTP)
 
 let config = {
@@ -77,13 +78,22 @@ function create() {
     title.setOrigin(0.5,0.5);
     
     //texte pour la question
-    //SOLUTION pour  avoir la question instalée dynamiquement: splitter la chaine de character en tous les x character et set origin au centre (0.5,0.5)
-    questionText = this.add.text(50,config.height / 3 -50, questionJSON.questions[currentIndex].title, 
-        {fontFamily: 'Oswald', 
-        fontSize: 30, 
+    let textStyle = {
+        fontFamily: 'Oswald',
+        fontSize: '30px',
         fontStyle: 'bold',
-        color: textColor}
-        );
+        color: textColor
+    };
+
+    // Create a placeholder Text object.
+    let questionText = this.add.text(50, config.height / 3 - 50, '', textStyle);
+
+    // Extract the question title from your JSON and justify it.
+    let rawQuestion = questionJSON.questions[currentIndex].title;
+    let justifiedQuestion = justifyText(rawQuestion, config.width - 100, questionText);  // Subtracting 100 to account for the 50px padding on both sides.
+
+    // Set the justified content to the Text object.
+    questionText.setText(justifiedQuestion);
            
         
     for (let i = 0; i < 3; i++) 
@@ -97,7 +107,7 @@ function create() {
         answerPanel[i].setScale(0.7);
         
         //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
-        answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: purpleColor});
+        answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: textColor});
         answerText[i].setOrigin(0.5, 0.5);
     }   
     
@@ -144,10 +154,14 @@ function create() {
     rectangle.setVisible(false);
     
     //TO DO: place the bioHinT better
-    bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, questionJSON.questions[currentIndex].bio, 
+    bioText = questionJSON.questions[currentIndex].bio
+    bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' , 
         {fontFamily: 'Impact', 
-        fontSize: 20, 
+        fontSize: '20px', 
         color: '#fac70b'});
+
+    let justifiedContent = justifyText(bioText, config.width - 60, bioHint);
+    bioHint.setText(justifiedContent);
     bioHint.setVisible(false);
 }
 
@@ -193,14 +207,14 @@ function nextQuestion () {
 
         questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
         
-        // C'ETAIT ICI MON ERREUR !!!
+        // C'ETAIT ICI MON ERREUR: il fallait ajouter le to string
         scientistImage.setTexture('scientist' + currentIndex.toString());   
         bioHint.text = questionJSON.questions[currentIndex].bio;     
         
         //ajout des prochaines réponses
         for (let i = 0; i < numberOfQuestions; i++) {
             answerText[i].text = questionJSON.questions[currentIndex].answer[i];
-            answerText[i].setColor("#000000");
+            answerText[i].setColor(textColor);
             answerPanel[i].setInteractive();
         }
 
@@ -226,4 +240,46 @@ function getHint() {
     bioHint.setVisible(true);
     moreInfoCat.setVisible(false);
     playButton.setVisible(true);
+}
+
+//this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
+function justifyText(text, maxWidth, phaserTextObject){
+    const words = text.split(' ');
+    let currentLine = words[0];
+    let justifiedText = "";
+
+    for (let i = 1; i < words.length; i++) {
+        
+        let potentialLine = currentLine + " " + words[i];
+
+        phaserTextObject.setText(potentialLine);
+        let lineWidth = phaserTextObject.width;
+
+        if (lineWidth <= maxWidth) {
+            currentLine = potentialLine;
+        } else {
+            // Calculate the extra spaces needed to fill the maxWidth
+            phaserTextObject.setText(" ");
+            let spaceWidth = phaserTextObject.width;
+
+            let extraSpaces = Math.floor((maxWidth - lineWidth) / spaceWidth);
+            
+            // Distribute the extra spaces evenly among the spaces in currentLine
+            // Calculate the number of spaces to add between each word
+            let spacesToAdd = Math.floor(extraSpaces / (currentLine.split(' ').length - 1));
+            //let spacesToAdd = Math.floor((maxWidth - lineWidth) / spaceWidth); ??
+            
+            // Create a string of spaces including the original space + the additional spaces
+            let spaceString = ' '.repeat(1 + Math.max(0, spacesToAdd)); //avoid negative values
+            
+            // "/ /": This is a regular expression pattern that matches a single space character.
+            //g: This stands for "global". It's a flag that indicates the regular expression should match all occurrences in the string, not just the first one.
+            currentLine = currentLine.replace(/ /g, spaceString);
+            justifiedText += currentLine + "\n";
+            currentLine = words[i];
+        }
+    }
+    justifiedText += currentLine;  // add the last line
+
+    return justifiedText;
 }

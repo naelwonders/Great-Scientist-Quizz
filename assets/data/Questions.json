@@ -1,34 +1,34 @@
 {
     "questions": [
         {
-            "title": "I am the first woman to win a Nobel\nPrize in 1911... ",
+            "title": "I am the first woman to win a NobelPrize in 1911... ",
             "answer": ["Marie Curie", "Eleonore Paprika", "Géraldine Poivrette"],
             "goodAnswer": 0,
-            "bio": "Physicist and chemist\nShe discovered radioactivity and invented\na mobile X-ray unit that was used during World War I."
+            "bio": "Physicist and chemistShe discovered radioactivity and invented a mobile X-ray unit that was used during World War I."
         },
         {
-            "title": "Watson and Crick discovered\nthe molecular structure of DNA because of some pictures I took...",
+            "title": "Watson and Crick discoveredthe molecular structure of DNA because of some pictures I took...",
             "answer": ["Fleur Adamson", "Rosalind Franklin", "Lilly Allen"],
             "goodAnswer": 1,
-            "bio": "***Chemist\nShe took the first picture\nof DNA using X-ray crystallography.\nThis lead to the discovery the\ndouble helix."
+            "bio": "***ChemistShe took the first pictureof DNA using X-ray crystallography.This lead to the discovery thedouble helix."
         },
         {
-            "title": "I am the first woman to work\nat NASA as a mathematician..",
+            "title": "I am the first woman to workat NASA as a mathematician..",
             "answer": ["Kelly Thomson", "Katherine Johnson", "Your granny"],
             "goodAnswer": 1,
-            "bio": "Mathematician\nIN PROGRESS:\nSans moi, les astraunautes de la\nmission pollo 13 n'aurait pas survecus"
+            "bio": "MathematicianIN PROGRESS:Sans moi, les astraunautes de lamission pollo 13 n'aurait pas survecus"
         },
         {
-            "title": "I am invented programming...\nbefore computers existed.",
+            "title": "I am invented programming...before computers existed.",
             "answer": ["Luna Lovegood", "Goodie Osborn", "Ada Lovelace"],
             "goodAnswer": 2,
-            "bio": "WHAT IS SHE\nIN PROGRESS:\n...."
+            "bio": "WHAT IS SHEIN PROGRESS:...."
         },
         {
-            "title": "I am starrrrr...\nand I invented wifi...",
+            "title": "I am starrrrr...and I invented wifi...",
             "answer": ["Hedy Lamarr", "Kate Winslet", "Lady Gaga"],
             "goodAnswer": 0,
-            "bio": "Actress and Scientist\nIN PROGRESS:\n...."
+            "bio": "Actress and ScientistIN PROGRESS:...."
         }
   ]
 }
