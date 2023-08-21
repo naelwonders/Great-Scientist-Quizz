@@ -1,6 +1,7 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
 
 //To do:
+//for (let i = 0; i < 3; i++) se repetent 3x, et j'aurais besoin d'une 4e copie donc il est temps de faire une fonction
 //faire une fonction current question pour faciliter l'ajout d'un hint (back and forth made easier)
 //add a button to go back after pressing the hint (instead of next question)
 //fontFamily: 'Old English Text MT' not supported in all browsers
@@ -35,12 +36,15 @@ let rectangle;
 let numberOfQuestions;
 let hint, bioHint;
 let previousButton
+let questionText;
 
 let textColor = "#F4E3D7" // Ethereal Parchment
 let backgroundColor = "#322E4F" //Dark Enigma
 let purpleColor = "#655872" //Mystic Purple
 let buttonColor = "#9D8AA5" //Twilight Lavender
 let accentColor = "#D4AF37" //Golden Alchemy
+let rightColor = "#00ff00";// redish
+let wrongColor = "#0000ff"; // blue
 
 
 function preload() {
@@ -88,7 +92,7 @@ function create() {
     };
 
     // Create a placeholder Text object.
-    let questionText = this.add.text(50, config.height / 3 - 50, '', textStyle);
+    questionText = this.add.text(50, config.height / 3 - 50, '', textStyle);
 
     // Extract the question title from your JSON and justify it.
     let rawQuestion = questionJSON.questions[currentIndex].title;
@@ -130,21 +134,21 @@ function create() {
     moreInfoCat.on('pointerdown',()=> { getHint() })
     
     hint = this.add.text(70, (config.height / 2) + 50, "Click here\n for a hint", 
-        {fontFamily: 'Impact', 
-        fontSize: 20, 
-        color: accentColor});
+    {fontFamily: 'Impact', 
+    fontSize: 20, 
+    color: accentColor});
     title.setOrigin(0.5,0.5);
-
+    
+    //le bouton pour passer à la prochaine question avec la fonction: nextQuestion
+    playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
+    playButton.on('pointerdown', nextQuestion)
+    playButton.setScale(0.4)
+    playButton.setVisible(false) //invisible tant que pas repondu
     
     scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
     scientistImage.setOrigin(0,0);
     scientistImage.setVisible(false);
     
-    //le bouton (invisible tant que pas repondu) pour passer à la prochaine question avec la fonction: nextQuestion
-    playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
-    playButton.on('pointerdown', nextQuestion)
-    playButton.setScale(0.4)
-    playButton.setVisible(false)
 
     
     // A REVOIR
@@ -157,6 +161,12 @@ function create() {
     rectangle.fillRoundedRect((config.width/2) - (widthRectangle / 2), 450, widthRectangle, lengthRectangle, 20); //setOrigin does not work with rect so use the size of the rect to determine its position
     rectangle.setVisible(false);
     
+    //le bouton pour revenir à la question (sortir du hint)
+    previousButton = this.add.image(config.width - 80, config.height / 2, 'previousButton').setInteractive();
+    previousButton.on('pointerdown', removeHint)
+    previousButton.setScale(0.5)
+    previousButton.setVisible(false) //tant que le hint n'est pas cliqué
+    
     //TO DO: place the bioHinT better
     bioText = questionJSON.questions[currentIndex].bio
     bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' , 
@@ -168,11 +178,6 @@ function create() {
         bioHint.setText(justifiedContent);
         bioHint.setVisible(false);
     }
-    //le bouton pour revenir à la question (sortir du hint)
-    previousButton = this.add.image(config.width - 80, config.height / 2, 'previousButton').setInteractive();
-    previousButton.on('pointerdown', removeHint)
-    previousButton.setScale(0.4)
-    previousButton.setVisible(false) //tant que le hint n'est pas cliqué
 
 function update() {
     // on a pas eu besoin de l'update car on est sur de l'evenementiel
@@ -182,7 +187,7 @@ function update() {
 function checkAnswer(indexAnswer) {
     for (let i = 0; i < 3; i++) {
         //tt mettre en rouge, puis rendre pas interactif
-        answerText[i].setColor("#ff0000");
+        answerText[i].setColor(rightColor);
         // on desactive les 3
         answerPanel[i].disableInteractive();
         }
@@ -195,58 +200,75 @@ function checkAnswer(indexAnswer) {
         fists[currentIndex].alpha = 0.3;
     }
 
+    answerText[questionJSON.questions[currentIndex].goodAnswer].setColor(wrongColor);
+    
+    playButton.setVisible(true);
     moreInfoCat.setVisible(false);
     hint.setVisible(false)
-    answerText[questionJSON.questions[currentIndex].goodAnswer].setColor("#00ff00");
-    playButton.setVisible(true);
+    previousButton.setVisible(false);
 }
 
 function nextQuestion () {
     
-    currentIndex ++;
-    playButton.setVisible(false)
-    scientistImage.setVisible(false);
-    rectangle.setVisible(false);
-    bioHint.setVisible(false);
-    
-    //that code is repeated !!
-    if (currentIndex < numberOfQuestions) {
-        moreInfoCat.setVisible(true);
-        hint.setVisible(true);
-
-        questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
+        //scientistImage.setVisible(false);
+        //rectangle.setVisible(false);
+        //bioHint.setVisible(false);
+        currentIndex ++;
+        playButton.setVisible(false)
         
-        // C'ETAIT ICI MON ERREUR: il fallait ajouter le to string
-        scientistImage.setTexture('scientist' + currentIndex.toString());   
-        bioHint.text = questionJSON.questions[currentIndex].bio;     
-        
-        //ajout des prochaines réponses
-        for (let i = 0; i < numberOfQuestions; i++) {
-            answerText[i].text = questionJSON.questions[currentIndex].answer[i];
-            answerText[i].setColor(textColor);
-            answerPanel[i].setInteractive();
+        //that code is repeated !!
+        if (currentIndex < numberOfQuestions) {
+            //previousButton.setVisible(false)
+            moreInfoCat.setVisible(true);
+            hint.setVisible(true);
+            
+            questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
+            
+            // C'ETAIT ICI MON ERREUR: il fallait ajouter le to string
+            scientistImage.setTexture('scientist' + currentIndex.toString());   
+            bioHint.text = questionJSON.questions[currentIndex].bio;     
+            
+            //ajout des prochaines réponses
+            for (let i = 0; i < 3; i++) {
+                answerText[i].text = questionJSON.questions[currentIndex].answer[i];
+                answerText[i].setColor(textColor);
+                answerPanel[i].setInteractive();
+            }
         }
 
-    }
+        //THERE IS MUCH TO DO HERE
+        else if (currentIndex >= numberOfQuestions) {
+            //write a congradulations message maybe
+            //make the questions dissappear (function to add and remove questions)
+            //change sa position aussi maybe
+            questionText.text = score.toString();
+            moreInfoCat.setVisible(false);
+            hint.setVisible(false);
+
+        }
 }
-// PREVIOUS QUESTION : to do
+
 
 function getHint() {
+    //display the scientist and the biography
     scientistImage.setVisible(true);
     rectangle.setVisible(true);
     bioHint.setVisible(true);
+    previousButton.setVisible(true)
+    //hide more info and the next question button (playbutton)
     moreInfoCat.setVisible(false);
     playButton.setVisible(false);
-    previousButton.setVisible(true)
  }
 
 function removeHint() {
+    //hide the scientist and the biography
     scientistImage.setVisible(false);
     rectangle.setVisible(false);
     bioHint.setVisible(false);
+    previousButton.setVisible(false)
+    
     moreInfoCat.setVisible(true);
     playButton.setVisible(true);
-    previousButton.setVisible(false)
 }
 
 //this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
