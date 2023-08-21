@@ -1,7 +1,6 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
 
 //To do:
-//fix the text by splitting into n characters (question and hint so make it a function)
 //add a button to go back after pressing the hint (instead of next question)
 //fontFamily: 'Old English Text MT' not supported in all browsers
 //take care of the esthetics (chat GTP)
@@ -160,7 +159,7 @@ function create() {
         fontSize: '20px', 
         color: '#fac70b'});
 
-    let justifiedContent = justifyText(bioText, config.width - 60, bioHint);
+    let justifiedContent = justifyText(bioText, widthRectangle - 40, bioHint);
     bioHint.setText(justifiedContent);
     bioHint.setVisible(false);
 }
@@ -219,6 +218,36 @@ function nextQuestion () {
         }
 
     }
+    // PREVIOUS QUESTION avec to do
+    
+    // function backToCurrentQuestion () {
+    
+    //     //currentIndex ++;
+    //     playButton.setVisible(false)
+    //     scientistImage.setVisible(false);
+    //     rectangle.setVisible(false);
+    //     bioHint.setVisible(false);
+        
+    //     //that code is repeated !!
+    //     if (currentIndex < numberOfQuestions) {
+    //         moreInfoCat.setVisible(true);
+    //         hint.setVisible(true);
+    
+    //         questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
+            
+    //         // C'ETAIT ICI MON ERREUR: il fallait ajouter le to string
+    //         scientistImage.setTexture('scientist' + currentIndex.toString());   
+    //         bioHint.text = questionJSON.questions[currentIndex].bio;     
+            
+    //         //ajout des prochaines réponses
+    //         for (let i = 0; i < numberOfQuestions; i++) {
+    //             answerText[i].text = questionJSON.questions[currentIndex].answer[i];
+    //             answerText[i].setColor(textColor);
+    //             answerPanel[i].setInteractive();
+    //         }
+    
+    //     }
+
     //après la derniere question
     else {
         moreInfoCat.setVisible(false);
