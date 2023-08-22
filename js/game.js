@@ -37,6 +37,8 @@ let numberOfQuestions;
 let hint, bioHint;
 let previousButton
 let questionText;
+let widthRectangle = 400;
+let lengthRectangle = 150;
 
 let textColor = "#F4E3D7" // Ethereal Parchment
 let titleColor = "#655872" //Mystic Purple
@@ -52,7 +54,7 @@ function preload() {
     //attention un folder qui s'appelle Sprite ne marchera pas sur ichio (je sais pas pourquoi though)
     //this.load.image('background', '../assets/Sprites/background.png');
     this.load.image('question', '../assets/Sprites/Label1.png');
-    this.load.image('answer', '../assets/Sprites/marble_brick_curved.png');
+    this.load.image('answer', '../assets/Sprites/tile.png');
     this.load.image('fist', '../assets/Sprites/fist.png');
     this.load.image('playButton', '../assets/Sprites/Play.png');
     this.load.image('previousButton', '../assets/Sprites/Back.png');
@@ -79,7 +81,7 @@ function create() {
     //titre en haut de chaque question
     title = this.add.text(config.width / 2, 100, "Great Scientists", 
         {fontFamily: 'Old English Text MT', 
-        fontSize: 70, 
+        fontSize: 80, 
         fontStyle: 'bold',
         color: titleColor});
     title.setOrigin(0.5,0.5);
@@ -92,12 +94,11 @@ function create() {
         color: textColor
     };
 
-    // Create a placeholder Text object.
-    questionText = this.add.text(50, config.height / 3 - 50, '', textStyle);
-
+    // Create a placeholder Text object (empty for now).
+    questionText = this.add.text(50, config.height / 3 - 50, questionJSON.questions[currentIndex].title, textStyle);
+    
     // Extract the question title from your JSON and justify it.
-    let rawQuestion = questionJSON.questions[currentIndex].title;
-    let justifiedQuestion = justifyText(rawQuestion, config.width - 100, questionText);  // Subtracting 100 to account for the 50px padding on both sides.
+    let justifiedQuestion = justifyText(questionJSON.questions[currentIndex].title, config.width - 50,scene, textStyle);  // Subtracting 100 to account for the 50px padding on both sides.
 
     // Set the justified content to the Text object.
     questionText.setText(justifiedQuestion);
@@ -155,8 +156,7 @@ function create() {
     // Draw a rectangle shape using the fill style
     rectangle.fillStyle(0x000000, 1); // Set fill color to red, alpha 1
     // The arguments are (x, y, width, height, radius of the rounded edges)
-    let widthRectangle = 400;
-    let lengthRectangle = 150;
+    
     rectangle.fillRoundedRect((config.width/2) - (widthRectangle / 2), 450, widthRectangle, lengthRectangle, 20); //setOrigin does not work with rect so use the size of the rect to determine its position
     rectangle.setVisible(false);
     
@@ -166,17 +166,18 @@ function create() {
     previousButton.setScale(0.5)
     previousButton.setVisible(false) //tant que le hint n'est pas cliqué
     
-    //TO DO: place the bioHinT better
-    bioText = questionJSON.questions[currentIndex].bio
-    bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' , 
-    {fontFamily: textFont, 
+    bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' ,{fontFamily:        
+        textFont, 
         fontSize: '20px', 
-        color: textColor});
+        color: textColor}); 
+    
+    bioText = questionJSON.questions[currentIndex].bio;
+    
         
-        let justifiedContent = justifyText(bioText, widthRectangle - 40, bioHint);
-        bioHint.setText(justifiedContent);
-        bioHint.setVisible(false);
-    }
+    let justifiedContent = justifyText(bioText, widthRectangle - 40);
+    bioHint.setText(justifiedContent);
+    bioHint.setVisible(false);
+}
 
 function update() {
     // on a pas eu besoin de l'update car on est sur de l'evenementiel
@@ -215,11 +216,14 @@ function nextQuestion () {
         moreInfoCat.setVisible(true);
         hint.setVisible(true);
         
-        questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
+        //function justifyText(text, maxLength)
+        let justifiedContent = justifyText(questionJSON.questions[currentIndex].title, questionText.width);
+        questionText.setText(justifiedContent); 
         
-        // C'ETAIT ICI MON ERREUR: il fallait ajouter le to string
         scientistImage.setTexture('scientist' + currentIndex.toString());   
-        bioHint.text = questionJSON.questions[currentIndex].bio;     
+        bioHint.text = questionJSON.questions[currentIndex].bio; 
+        
+        //JUSTIFY HERE
         
         //ajout des prochaines réponses
         for (let i = 0; i < 3; i++) {
@@ -272,43 +276,49 @@ function removeHint() {
 }
 
 //this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
-function justifyText(text, maxWidth, phaserTextObject){
+function justifyText(text, maxWidth, scene, textStyle){
     const words = text.split(' ');
     let currentLine = words[0];
     let justifiedText = "";
 
-    for (let i = 1; i < words.length; i++) {
-        
-        let potentialLine = currentLine + " " + words[i];
+    let measureText = scene.add.text(0, 0, '', textStyle);
+    measureText.setVisible(false); 
 
-        phaserTextObject.setText(potentialLine);
-        let lineWidth = phaserTextObject.width;
+    for (let i = 1; i < words.length; i++) {
+        let potentialLine = currentLine + " " + words[i];
+        measureText.setText(potentialLine);
+        let lineWidth = measureText.width;
 
         if (lineWidth <= maxWidth) {
             currentLine = potentialLine;
         } else {
-            // Calculate the extra spaces needed to fill the maxWidth
-            phaserTextObject.setText(" ");
-            let spaceWidth = phaserTextObject.width;
+            measureText.setText(" ");
+            let spaceWidth = measureText.width;
 
-            let extraSpaces = Math.floor((maxWidth - lineWidth) / spaceWidth);
-            
-            // Distribute the extra spaces evenly among the spaces in currentLine
-            // Calculate the number of spaces to add between each word
-            let spacesToAdd = Math.floor(extraSpaces / (currentLine.split(' ').length - 1));
-            //let spacesToAdd = Math.floor((maxWidth - lineWidth) / spaceWidth); ??
-            
-            // Create a string of spaces including the original space + the additional spaces
-            let spaceString = ' '.repeat(1 + Math.max(0, spacesToAdd)); //avoid negative values
-            
-            // "/ /": This is a regular expression pattern that matches a single space character.
-            //g: This stands for "global". It's a flag that indicates the regular expression should match all occurrences in the string, not just the first one.
-            currentLine = currentLine.replace(/ /g, spaceString);
+            let extraSpacePixels = maxWidth - measureText.width;
+            let numSpacesInLine = currentLine.split(' ').length - 1;
+            let spacesToAdd = Math.floor(extraSpacePixels / (spaceWidth * numSpacesInLine));
+            let remainingSpaces = extraSpacePixels - (spacesToAdd * spaceWidth * numSpacesInLine);
+
+            let newWords = currentLine.split(' ');
+
+            currentLine = newWords[0];
+            for (let j = 1; j < newWords.length; j++) {
+                let additionalSpace = spacesToAdd;
+                if (remainingSpaces > 0) {
+                    additionalSpace++;
+                    remainingSpaces -= spaceWidth;
+                }
+                currentLine += ' '.repeat(1 + additionalSpace) + newWords[j];
+            }
+
             justifiedText += currentLine + "\n";
             currentLine = words[i];
         }
     }
     justifiedText += currentLine;  // add the last line
+
+    measureText.destroy();  // Clean up the temporary text object
 
     return justifiedText;
 }
