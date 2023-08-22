@@ -1,10 +1,10 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
 
 //To do:
-//for (let i = 0; i < 3; i++) se repetent 3x, et j'aurais besoin d'une 4e copie donc il est temps de faire une fonction
-//faire une fonction current question pour faciliter l'ajout d'un hint (back and forth made easier)
-//add a button to go back after pressing the hint (instead of next question)
+//correct justified text for all bios
 //fontFamily: 'Old English Text MT' not supported in all browsers
+//randomize the questions
+//add juiciness
 //take care of the esthetics (chat GTP)
 
 let config = {
@@ -39,12 +39,16 @@ let previousButton
 let questionText;
 
 let textColor = "#F4E3D7" // Ethereal Parchment
-let backgroundColor = "#322E4F" //Dark Enigma
-let purpleColor = "#655872" //Mystic Purple
+let titleColor = "#655872" //Mystic Purple
 let buttonColor = "#9D8AA5" //Twilight Lavender
 let accentColor = "#D4AF37" //Golden Alchemy
 let rightColor = "#00ff00";// redish
 let wrongColor = "#0000ff"; // blue
+
+let textFont = "Garamond"
+
+//other colors to test :
+//#0B3D0B; /* Dark Forest Green */
 
 
 function preload() {
@@ -80,12 +84,12 @@ function create() {
         {fontFamily: 'Old English Text MT', 
         fontSize: 70, 
         fontStyle: 'bold',
-        color: purpleColor});
+        color: titleColor});
     title.setOrigin(0.5,0.5);
     
     //texte pour la question
     let textStyle = {
-        fontFamily: 'Oswald',
+        fontFamily: 'Garamond',
         fontSize: '30px',
         fontStyle: 'bold',
         color: textColor
@@ -113,7 +117,7 @@ function create() {
         answerPanel[i].setScale(0.7);
         
         //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
-        answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: 'Oswald', fontSize: 24, color: textColor});
+        answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: textFont, fontSize: 24, color: textColor});
         answerText[i].setOrigin(0.5, 0.5);
     }   
     
@@ -134,8 +138,8 @@ function create() {
     moreInfoCat.on('pointerdown',()=> { getHint() })
     
     hint = this.add.text(70, (config.height / 2) + 50, "Click here\n for a hint", 
-    {fontFamily: 'Impact', 
-    fontSize: 20, 
+    {fontFamily: textFont, 
+    fontSize: 25, 
     color: accentColor});
     title.setOrigin(0.5,0.5);
     
@@ -148,8 +152,6 @@ function create() {
     scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
     scientistImage.setOrigin(0,0);
     scientistImage.setVisible(false);
-    
-
     
     // A REVOIR
     rectangle = this.add.graphics();
@@ -170,9 +172,9 @@ function create() {
     //TO DO: place the bioHinT better
     bioText = questionJSON.questions[currentIndex].bio
     bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' , 
-    {fontFamily: 'Impact', 
+    {fontFamily: textFont, 
         fontSize: '20px', 
-        color: '#fac70b'});
+        color: textColor});
         
         let justifiedContent = justifyText(bioText, widthRectangle - 40, bioHint);
         bioHint.setText(justifiedContent);
@@ -187,11 +189,11 @@ function update() {
 function checkAnswer(indexAnswer) {
     for (let i = 0; i < 3; i++) {
         //tt mettre en rouge, puis rendre pas interactif
-        answerText[i].setColor(rightColor);
+        answerText[i].setColor(wrongColor);
         // on desactive les 3
         answerPanel[i].disableInteractive();
-        }
-
+    }
+    
     if (indexAnswer == questionJSON.questions[currentIndex].goodAnswer) {
         fists[currentIndex].alpha = 1;
         score += 1;
@@ -199,26 +201,20 @@ function checkAnswer(indexAnswer) {
     else {
         fists[currentIndex].alpha = 0.3;
     }
-
-    answerText[questionJSON.questions[currentIndex].goodAnswer].setColor(wrongColor);
+    
+    answerText[questionJSON.questions[currentIndex].goodAnswer].setColor(rightColor);
     
     playButton.setVisible(true);
     moreInfoCat.setVisible(false);
     hint.setVisible(false)
-    previousButton.setVisible(false);
 }
 
 function nextQuestion () {
     
-        //scientistImage.setVisible(false);
-        //rectangle.setVisible(false);
-        //bioHint.setVisible(false);
         currentIndex ++;
         playButton.setVisible(false)
         
-        //that code is repeated !!
         if (currentIndex < numberOfQuestions) {
-            //previousButton.setVisible(false)
             moreInfoCat.setVisible(true);
             hint.setVisible(true);
             
@@ -238,12 +234,21 @@ function nextQuestion () {
 
         //THERE IS MUCH TO DO HERE
         else if (currentIndex >= numberOfQuestions) {
-            //write a congradulations message maybe
-            //make the questions dissappear (function to add and remove questions)
-            //change sa position aussi maybe
-            questionText.text = score.toString();
+            //replace the question with the score
+            questionText.text = "Your final score is " + score.toString() + " / " + numberOfQuestions;
+            questionText.setPosition(config.width/2, config.height/2)
+            questionText.setOrigin(0.5,0.5)
+
+            //make the answers and pannels dissappear
+            for (let i = 0; i < 3; i++) {
+                answerText[i].setVisible(false);
+                answerPanel[i].setVisible(false);
+            }
+            
+            //remore hint option
             moreInfoCat.setVisible(false);
             hint.setVisible(false);
+
 
         }
 }
