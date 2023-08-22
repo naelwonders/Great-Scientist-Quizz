@@ -47,9 +47,6 @@ let wrongColor = "#0000ff"; // blue
 
 let textFont = "Garamond"
 
-//other colors to test :
-//#0B3D0B; /* Dark Forest Green */
-
 
 function preload() {
     //attention un folder qui s'appelle Sprite ne marchera pas sur ichio (je sais pas pourquoi though)
@@ -211,46 +208,44 @@ function checkAnswer(indexAnswer) {
 
 function nextQuestion () {
     
-        currentIndex ++;
-        playButton.setVisible(false)
+    currentIndex ++;
+    playButton.setVisible(false)
+    
+    if (currentIndex < numberOfQuestions) {
+        moreInfoCat.setVisible(true);
+        hint.setVisible(true);
         
-        if (currentIndex < numberOfQuestions) {
-            moreInfoCat.setVisible(true);
-            hint.setVisible(true);
-            
-            questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
-            
-            // C'ETAIT ICI MON ERREUR: il fallait ajouter le to string
-            scientistImage.setTexture('scientist' + currentIndex.toString());   
-            bioHint.text = questionJSON.questions[currentIndex].bio;     
-            
-            //ajout des prochaines réponses
-            for (let i = 0; i < 3; i++) {
-                answerText[i].text = questionJSON.questions[currentIndex].answer[i];
-                answerText[i].setColor(textColor);
-                answerPanel[i].setInteractive();
-            }
+        questionText.text = questionJSON.questions[currentIndex].title; // questionText est un objet, on change la propriété de l'objet ".text"; cette propriété pour aller changer le texte meme (voir JSON file)
+        
+        // C'ETAIT ICI MON ERREUR: il fallait ajouter le to string
+        scientistImage.setTexture('scientist' + currentIndex.toString());   
+        bioHint.text = questionJSON.questions[currentIndex].bio;     
+        
+        //ajout des prochaines réponses
+        for (let i = 0; i < 3; i++) {
+            answerText[i].text = questionJSON.questions[currentIndex].answer[i];
+            answerText[i].setColor(textColor);
+            answerPanel[i].setInteractive();
         }
+    }
 
-        //THERE IS MUCH TO DO HERE
-        else if (currentIndex >= numberOfQuestions) {
-            //replace the question with the score
-            questionText.text = "Your final score is " + score.toString() + " / " + numberOfQuestions;
-            questionText.setPosition(config.width/2, config.height/2)
-            questionText.setOrigin(0.5,0.5)
+    else if (currentIndex >= numberOfQuestions) {
+        //replace the question with the score
+        questionText.text = "Your final score is " + score.toString() + " / " + numberOfQuestions;
+        questionText.setPosition(config.width/2, config.height/2)
+        questionText.setOrigin(0.5,0.5)
 
-            //make the answers and pannels dissappear
-            for (let i = 0; i < 3; i++) {
-                answerText[i].setVisible(false);
-                answerPanel[i].setVisible(false);
-            }
-            
-            //remore hint option
-            moreInfoCat.setVisible(false);
-            hint.setVisible(false);
-
-
+        //make the answers and pannels dissappear
+        for (let i = 0; i < 3; i++) {
+            answerText[i].setVisible(false);
+            answerPanel[i].setVisible(false);
         }
+        
+        //remove hint option
+        moreInfoCat.setVisible(false);
+        hint.setVisible(false);
+
+    }
 }
 
 
