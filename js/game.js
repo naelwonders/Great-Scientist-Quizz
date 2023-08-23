@@ -1,10 +1,12 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
 
 //To do:
-//correct justified text for all bios
+//
+//the bio does not appear (for non of the questions), but is correctly justified
+//find a way to change the panel for the right answer (rightAnswer)
 //fontFamily: 'Old English Text MT' not supported in all browsers
-//randomize the questions
-//add juiciness
+//randomize the questions and the answers
+//add juiciness (noises and visual effects)
 //take care of the esthetics (chat GTP)
 
 let config = {
@@ -39,13 +41,14 @@ let previousButton
 let questionText;
 let widthRectangle = 400;
 let lengthRectangle = 150;
+let panel;
 
 let textColor = "#F4E3D7" // Ethereal Parchment
 let titleColor = "#655872" //Mystic Purple
 let buttonColor = "#9D8AA5" //Twilight Lavender
 let accentColor = "#D4AF37" //Golden Alchemy
-let rightColor = "#00ff00";// redish
-let wrongColor = "#0000ff"; // blue
+let rightColor = "#006400";// Dark Green
+let wrongColor = "#800020"; // Bordeaux
 
 let textFont = "Garamond"
 
@@ -55,6 +58,8 @@ function preload() {
     //this.load.image('background', '../assets/Sprites/background.png');
     this.load.image('question', '../assets/Sprites/Label1.png');
     this.load.image('answer', '../assets/Sprites/tile.png');
+    this.load.image('rightAnswer', '../assets/Sprites/greenTile.png');
+
     this.load.image('fist', '../assets/Sprites/fist.png');
     this.load.image('playButton', '../assets/Sprites/Play.png');
     this.load.image('previousButton', '../assets/Sprites/Back.png');
@@ -95,22 +100,23 @@ function create() {
     };
 
     // Create a placeholder Text object (empty for now).
-    questionText = this.add.text(50, config.height / 3 - 50, questionJSON.questions[currentIndex].title, textStyle);
+    this.questionText = this.add.text(50, config.height / 3 - 50, "", textStyle);
     
     // Extract the question title from your JSON and justify it.
-    let justifiedQuestion = justifyText(questionJSON.questions[currentIndex].title, config.width - 50,scene, textStyle);  // Subtracting 100 to account for the 50px padding on both sides.
+    let justifiedQuestion = justifyText(this.questionText,questionJSON.questions[currentIndex].title, config.width - 100);  // Subtracting 100 to account for the 50px padding on both sides.
 
     // Set the justified content to the Text object.
-    questionText.setText(justifiedQuestion);
+    this.questionText.setText(justifiedQuestion);
            
         
     for (let i = 0; i < 3; i++) 
     {
         choice = questionJSON.questions[currentIndex].answer[i]
         
+        panel = 'answer';
         //les panneaux de reponse sont interactives
-        answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), 'answer').setInteractive();
-        answerPanel[i].on('pointerdown', () => {checkAnswer(i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
+        answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), panel).setInteractive();
+        answerPanel[i].on('pointerdown', () => {checkAnswer(i).bind(this)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
         answerPanel[i].alpha = 0.5;
         answerPanel[i].setScale(0.7);
         
@@ -143,7 +149,7 @@ function create() {
     
     //le bouton pour passer à la prochaine question avec la fonction: nextQuestion
     playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
-    playButton.on('pointerdown', nextQuestion)
+    playButton.on('pointerdown', nextQuestion.bind(this));
     playButton.setScale(0.4)
     playButton.setVisible(false) //invisible tant que pas repondu
     
@@ -166,17 +172,14 @@ function create() {
     previousButton.setScale(0.5)
     previousButton.setVisible(false) //tant que le hint n'est pas cliqué
     
-    bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' ,{fontFamily:        
+    this.bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' ,{fontFamily:        
         textFont, 
         fontSize: '20px', 
         color: textColor}); 
     
-    bioText = questionJSON.questions[currentIndex].bio;
-    
-        
-    let justifiedContent = justifyText(bioText, widthRectangle - 40);
-    bioHint.setText(justifiedContent);
-    bioHint.setVisible(false);
+    let justifiedContent = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, widthRectangle - 40);
+    this.bioHint.setText(justifiedContent);
+    this.bioHint.setVisible(false);
 }
 
 function update() {
@@ -185,6 +188,16 @@ function update() {
 
 //mettre des couleurs en fonction des bonnes/mauvaises reponses
 function checkAnswer(indexAnswer) {
+    if (indexAnswer == questionJSON.questions[currentIndex].goodAnswer) {
+        fists[currentIndex].alpha = 1;
+        score += 1;
+        panel = "rightAnswer"
+    }
+    else {
+        fists[currentIndex].alpha = 0.3;
+        panel = "answer"
+    }
+
     for (let i = 0; i < 3; i++) {
         //tt mettre en rouge, puis rendre pas interactif
         answerText[i].setColor(wrongColor);
@@ -192,13 +205,6 @@ function checkAnswer(indexAnswer) {
         answerPanel[i].disableInteractive();
     }
     
-    if (indexAnswer == questionJSON.questions[currentIndex].goodAnswer) {
-        fists[currentIndex].alpha = 1;
-        score += 1;
-    }
-    else {
-        fists[currentIndex].alpha = 0.3;
-    }
     
     answerText[questionJSON.questions[currentIndex].goodAnswer].setColor(rightColor);
     
@@ -215,15 +221,15 @@ function nextQuestion () {
     if (currentIndex < numberOfQuestions) {
         moreInfoCat.setVisible(true);
         hint.setVisible(true);
-        
-        //function justifyText(text, maxLength)
-        let justifiedContent = justifyText(questionJSON.questions[currentIndex].title, questionText.width);
-        questionText.setText(justifiedContent); 
-        
         scientistImage.setTexture('scientist' + currentIndex.toString());   
-        bioHint.text = questionJSON.questions[currentIndex].bio; 
         
-        //JUSTIFY HERE
+        //function justifyText for both question and bio
+        let justifiedContent = justifyText(this.questionText,questionJSON.questions[currentIndex].title, config.width - 100);
+        this.questionText.setText(justifiedContent); 
+
+        let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
+        this.bioHint.setText(justifiedBio); 
+        
         
         //ajout des prochaines réponses
         for (let i = 0; i < 3; i++) {
@@ -235,9 +241,9 @@ function nextQuestion () {
 
     else if (currentIndex >= numberOfQuestions) {
         //replace the question with the score
-        questionText.text = "Your final score is " + score.toString() + " / " + numberOfQuestions;
-        questionText.setPosition(config.width/2, config.height/2)
-        questionText.setOrigin(0.5,0.5)
+        this.questionText.text = "Your final score is " + score.toString() + " / " + numberOfQuestions;
+        this.questionText.setPosition(config.width/2, config.height/2)
+        this.questionText.setOrigin(0.5,0.5)
 
         //make the answers and pannels dissappear
         for (let i = 0; i < 3; i++) {
@@ -259,6 +265,7 @@ function getHint() {
     rectangle.setVisible(true);
     bioHint.setVisible(true);
     previousButton.setVisible(true)
+
     //hide more info and the next question button (playbutton)
     moreInfoCat.setVisible(false);
     playButton.setVisible(false);
@@ -276,26 +283,28 @@ function removeHint() {
 }
 
 //this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
-function justifyText(text, maxWidth, scene, textStyle){
+function justifyText(textObject, text, maxWidth){
     const words = text.split(' ');
+    let space = " "
     let currentLine = words[0];
     let justifiedText = "";
 
-    let measureText = scene.add.text(0, 0, '', textStyle);
-    measureText.setVisible(false); 
+    //measure space width
+    textObject.setText(' ');
+    const spaceWidth = textObject.width;
 
     for (let i = 1; i < words.length; i++) {
-        let potentialLine = currentLine + " " + words[i];
-        measureText.setText(potentialLine);
-        let lineWidth = measureText.width;
+        let potentialLine = currentLine + space + words[i];
+        textObject.setText(potentialLine)
+        //si la longueure en pixels de la chaine de characters (potential)
 
-        if (lineWidth <= maxWidth) {
+        if (textObject.width <= maxWidth) {
             currentLine = potentialLine;
-        } else {
-            measureText.setText(" ");
-            let spaceWidth = measureText.width;
+        } 
+        else {
+            textObject.setText(currentLine)
+            let extraSpacePixels = maxWidth - textObject.width; 
 
-            let extraSpacePixels = maxWidth - measureText.width;
             let numSpacesInLine = currentLine.split(' ').length - 1;
             let spacesToAdd = Math.floor(extraSpacePixels / (spaceWidth * numSpacesInLine));
             let remainingSpaces = extraSpacePixels - (spacesToAdd * spaceWidth * numSpacesInLine);
@@ -317,8 +326,6 @@ function justifyText(text, maxWidth, scene, textStyle){
         }
     }
     justifiedText += currentLine;  // add the last line
-
-    measureText.destroy();  // Clean up the temporary text object
 
     return justifiedText;
 }
