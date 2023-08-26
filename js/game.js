@@ -1,13 +1,16 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
 
-//To do:
-//
-//the bio does not appear (for non of the questions), but is correctly justified
+//TO DO:
+//BUGG: the answers don't update anymore
+// BUGG: fix the panels for the wanted effect
+//BUGG: the back button in the hint goes to the next hint directly xD
+//BUGG: the bio does not appear (for non of the questions), but is correctly justified
 //find a way to change the panel for the right answer (rightAnswer)
 //fontFamily: 'Old English Text MT' not supported in all browsers
 //randomize the questions and the answers
 //add juiciness (noises and visual effects)
-//take care of the esthetics (chat GTP)
+//create an init and separate the initialisation vs the declaration
+//take care of the esthetics
 
 let config = {
     type: Phaser.AUTO,
@@ -25,19 +28,19 @@ let config = {
     autoCenter: true
 };
 
-//TO DO: create an init and separate the initialisation vs the declaration
 let game = new Phaser.Game(config);
+
 let currentIndex = 0;
 let answerPanel = [];
+let rightAnswerPanel = [];
 let answerText = [];
 let fists = [];
 let score = 0;
 let moreInfoCat;
-let scientistImage;
 let rectangle;
 let numberOfQuestions;
 let hint, bioHint;
-let previousButton
+let previousButton;
 let questionText;
 let widthRectangle = 400;
 let lengthRectangle = 150;
@@ -58,7 +61,7 @@ function preload() {
     //this.load.image('background', '../assets/Sprites/background.png');
     this.load.image('question', '../assets/Sprites/Label1.png');
     this.load.image('answer', '../assets/Sprites/tile.png');
-    this.load.image('rightAnswer', '../assets/Sprites/greenTile.png');
+    this.load.image('rightanswer', '../assets/Sprites/greenTile.png');
 
     this.load.image('fist', '../assets/Sprites/fist.png');
     this.load.image('playButton', '../assets/Sprites/Play.png');
@@ -114,6 +117,13 @@ function create() {
         choice = questionJSON.questions[currentIndex].answer[i]
         
         panel = 'answer';
+        
+        //this green panel is hidden behind the other panel, it will be made visible when the user will choose an answer : only for the right answer
+        rightAnswerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), 'right' + panel)
+        rightAnswerPanel[i].alpha = 0.5;
+        rightAnswerPanel[i].setScale(0.7);
+        rightAnswerPanel[i].setVisible(false);
+
         //les panneaux de reponse sont interactives
         answerPanel[i] = this.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), panel).setInteractive();
         answerPanel[i].on('pointerdown', () => {checkAnswer(i).bind(this)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
@@ -139,23 +149,19 @@ function create() {
     //moreInfoCat.setVisible(false);
     moreInfoCat.setScale(0.3);
     //when I click on the moreInfo cat, the bio will appear on screen
-    moreInfoCat.on('pointerdown',()=> { getHint() })
+    moreInfoCat.on('pointerdown', getHint().bind(this));
+
+    this.getHint = getHint.bind(this);
     
     hint = this.add.text(70, (config.height / 2) + 50, "Click here\n for a hint", 
     {fontFamily: textFont, 
-    fontSize: 25, 
-    color: accentColor});
-    title.setOrigin(0.5,0.5);
-    
-    //le bouton pour passer à la prochaine question avec la fonction: nextQuestion
-    playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
-    playButton.on('pointerdown', nextQuestion.bind(this));
-    playButton.setScale(0.4)
-    playButton.setVisible(false) //invisible tant que pas repondu
-    
-    scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
-    scientistImage.setOrigin(0,0);
-    scientistImage.setVisible(false);
+        fontSize: 25, 
+        color: accentColor});
+        title.setOrigin(0.5,0.5);
+        
+    this.scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
+    this.scientistImage.setOrigin(0,0);
+    this.scientistImage.setVisible(false);
     
     // A REVOIR
     rectangle = this.add.graphics();
@@ -172,14 +178,26 @@ function create() {
     previousButton.setScale(0.5)
     previousButton.setVisible(false) //tant que le hint n'est pas cliqué
     
-    this.bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' ,{fontFamily:        
+    //HINT SECTION
+    this.bioHint = this.add.text((config.width/2) - (widthRectangle / 2) + 30, 450 + 30, '' ,
+        {fontFamily:        
         textFont, 
         fontSize: '20px', 
         color: textColor}); 
+
     
     let justifiedContent = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, widthRectangle - 40);
     this.bioHint.setText(justifiedContent);
+    
     this.bioHint.setVisible(false);
+
+    //le bouton pour passer à la prochaine question avec la fonction: nextQuestion
+    playButton = this.add.image(config.width - 80, config.height / 2, 'playButton').setInteractive();
+    playButton.on('pointerdown', nextQuestion.bind(this));
+    playButton.setScale(0.4)
+    playButton.setVisible(false) //invisible tant que pas repondu
+    
+    
 }
 
 function update() {
@@ -188,25 +206,24 @@ function update() {
 
 //mettre des couleurs en fonction des bonnes/mauvaises reponses
 function checkAnswer(indexAnswer) {
+    
+    for (let i = 0; i < 3; i++) {
+    //what happens when the answer is right vs wrong
     if (indexAnswer == questionJSON.questions[currentIndex].goodAnswer) {
         fists[currentIndex].alpha = 1;
+        rightAnswerPanel[currentIndex].setVisible(true);
         score += 1;
-        panel = "rightAnswer"
     }
     else {
         fists[currentIndex].alpha = 0.3;
-        panel = "answer"
+    }
+    
+    //display the following answerPanels (before the question because we are putting different answerPanel for the right answer)
+        
+    //answerPanel[i].setVisible(false);
     }
 
-    for (let i = 0; i < 3; i++) {
-        //tt mettre en rouge, puis rendre pas interactif
-        answerText[i].setColor(wrongColor);
-        // on desactive les 3
-        answerPanel[i].disableInteractive();
-    }
-    
-    
-    answerText[questionJSON.questions[currentIndex].goodAnswer].setColor(rightColor);
+    rightAnswerPanel[questionJSON.questions[currentIndex].goodAnswer].setTexture("rightanswer");
     
     playButton.setVisible(true);
     moreInfoCat.setVisible(false);
@@ -221,7 +238,7 @@ function nextQuestion () {
     if (currentIndex < numberOfQuestions) {
         moreInfoCat.setVisible(true);
         hint.setVisible(true);
-        scientistImage.setTexture('scientist' + currentIndex.toString());   
+        this.scientistImage.setTexture('scientist' + currentIndex.toString());   
         
         //function justifyText for both question and bio
         let justifiedContent = justifyText(this.questionText,questionJSON.questions[currentIndex].title, config.width - 100);
@@ -229,12 +246,13 @@ function nextQuestion () {
 
         let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
         this.bioHint.setText(justifiedBio); 
-        
-        
-        //ajout des prochaines réponses
+        this.biohint.setVisible(false);
+
+        //ajout des prochaines réponses avec les panels
         for (let i = 0; i < 3; i++) {
             answerText[i].text = questionJSON.questions[currentIndex].answer[i];
             answerText[i].setColor(textColor);
+            rightAnswerPanel[i].setVisible(false);
             answerPanel[i].setInteractive();
         }
     }
@@ -258,24 +276,27 @@ function nextQuestion () {
     }
 }
 
-
 function getHint() {
+    console.log(this);  // Should log the Phaser scene context
+
     //display the scientist and the biography
-    scientistImage.setVisible(true);
+    this.scientistImage.setVisible(true);
     rectangle.setVisible(true);
-    bioHint.setVisible(true);
+    //BUGG HERE
+    this.bioHint.setVisible(true);
     previousButton.setVisible(true)
 
     //hide more info and the next question button (playbutton)
+    // all that is interactive should be made invisible (it inactivates too), the others will be hidden by the scientist image
     moreInfoCat.setVisible(false);
     playButton.setVisible(false);
  }
 
 function removeHint() {
     //hide the scientist and the biography
-    scientistImage.setVisible(false);
+    this.scientistImage.setVisible(false);
     rectangle.setVisible(false);
-    bioHint.setVisible(false);
+    this.bioHint.setVisible(false);
     previousButton.setVisible(false)
     
     moreInfoCat.setVisible(true);
