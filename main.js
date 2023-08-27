@@ -20,24 +20,21 @@ let questionJSON;
 let numberOfQuestions;
 
 function loadQuestions() {
-    // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload), puis on shuffle the questions 
+    // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload)
     questionJSON = this.cache.json.get('questions');
+    shuffleArray(questionJSON.questions);
     numberOfQuestions = questionJSON.questions.length;
 }
 
 function create() {
-    // Initialize and display UI elements
-    createUIElements.call(this);  // "this" refers to the current scene
-
     loadQuestions.call(this);
     
-    // Shuffle answers for each question
-    questionJSON.questions.forEach(q => {
-        shuffleArray(q.answer);
-    });
-
+    // Initialize and display UI elements
+    createUIElements.call(this);  // "this" refers to the current scene
+    
+    displayQuestion(questionJSON.questions[currentIndex].title);
+    
     // Display the first question
-    displayQuestion(questionJSON.questions[currentIndex]);
 
     // ... other initialization logic ...
 }

@@ -1,14 +1,3 @@
-function displayQuestion(question) {
-    // Display the question and possible answers
-}
-
-function displayFeedback(isCorrect) {
-    // Display feedback based on whether the answer was correct or not
-}
-
-function updateScore(newScore) {
-    // Update the score display
-}
 
 let title;
 
@@ -42,12 +31,14 @@ function createUIElements() {
         color: titleColor
     });
     title.setOrigin(0.5, 0.5);
-
+    
 }
 
 function displayQuestion(question) {
+    
+    questionText = this.add.text(50, config.height / 3 - 50, "", textStyle);
     //BUGG question is not defined
-    questionText.setText(justifyText(questionText, question.title, config.width - 100));
+    questionText.setText(justifyText(this.questionText, question, config.width - 100));
     
     // Display the answer choices
     for (let i = 0; i < question.answer.length; i++) {
@@ -58,35 +49,36 @@ function displayQuestion(question) {
     }
 }
 
+
 //this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
 function justifyText(textObject, text, maxWidth){
     const words = text.split(' ');
     let space = " "
     let currentLine = words[0];
     let justifiedText = "";
-
+    
     //measure space width
     textObject.setText(' ');
     const spaceWidth = textObject.width;
-
+    
     for (let i = 1; i < words.length; i++) {
         let potentialLine = currentLine + space + words[i];
         textObject.setText(potentialLine)
         //si la longueure en pixels de la chaine de characters (potential)
-
+        
         if (textObject.width <= maxWidth) {
             currentLine = potentialLine;
         } 
         else {
             textObject.setText(currentLine)
             let extraSpacePixels = maxWidth - textObject.width; 
-
+            
             let numSpacesInLine = currentLine.split(' ').length - 1;
             let spacesToAdd = Math.floor(extraSpacePixels / (spaceWidth * numSpacesInLine));
             let remainingSpaces = extraSpacePixels - (spacesToAdd * spaceWidth * numSpacesInLine);
-
+            
             let newWords = currentLine.split(' ');
-
+            
             currentLine = newWords[0];
             for (let j = 1; j < newWords.length; j++) {
                 let additionalSpace = spacesToAdd;
@@ -96,13 +88,13 @@ function justifyText(textObject, text, maxWidth){
                 }
                 currentLine += ' '.repeat(1 + additionalSpace) + newWords[j];
             }
-
+            
             justifiedText += currentLine + "\n";
             currentLine = words[i];
         }
     }
     justifiedText += currentLine;  // add the last line
-
+    
     return justifiedText;
 }
 
