@@ -34,19 +34,27 @@ function createUIElements() {
     
 }
 
-function displayQuestion(question) {
+function displayQuestion(context,question) {
+
+    //texte pour la question
+    let textStyle = {
+        fontFamily: 'Garamond',
+        fontSize: '30px',
+        fontStyle: 'bold',
+        color: textColor};
     
-    questionText = this.add.text(50, config.height / 3 - 50, "", textStyle);
-    //BUGG question is not defined
-    questionText.setText(justifyText(this.questionText, question, config.width - 100));
+    questionTextObject = context.add.text(50, config.height / 3 - 50, "", textStyle);
+
+    let justifiedQuestion = justifyText(questionTextObject, question, config.width - 100);
+    questionTextObject.setText(justifiedQuestion);
     
-    // Display the answer choices
-    for (let i = 0; i < question.answer.length; i++) {
-        answerText[i].text = question.answer[i];
-        answerText[i].setColor(textColor);
-        rightAnswerPanel[i].setVisible(false);
-        answerPanel[i].setInteractive();
-    }
+    // // Display the answer choices
+    // for (let i = 0; i < question.answer.length; i++) {
+    //     answerText[i].text = question.answer[i];
+    //     answerText[i].setColor(textColor);
+    //     rightAnswerPanel[i].setVisible(false);
+    //     answerPanel[i].setInteractive();
+    // }
 }
 
 
@@ -57,7 +65,7 @@ function justifyText(textObject, text, maxWidth){
     let currentLine = words[0];
     let justifiedText = "";
     
-    //measure space width
+    //measure space width: BUGG
     textObject.setText(' ');
     const spaceWidth = textObject.width;
     

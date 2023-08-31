@@ -18,6 +18,8 @@ let game = new Phaser.Game(config);
 
 let questionJSON;
 let numberOfQuestions;
+let currentIndex;
+let score;
 
 function loadQuestions() {
     // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload)
@@ -27,12 +29,16 @@ function loadQuestions() {
 }
 
 function create() {
+
+    currentIndex = 0;
+    score = 0;
+
     loadQuestions.call(this);
     
     // Initialize and display UI elements
     createUIElements.call(this);  // "this" refers to the current scene
     
-    displayQuestion(questionJSON.questions[currentIndex].title);
+    displayQuestion(this, questionJSON.questions[currentIndex].title);
     
     // Display the first question
 

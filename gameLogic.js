@@ -1,11 +1,8 @@
 
-let currentIndex = 0;
-let score = 0;
-
 function checkAnswer(selectedAnswer) {
-    // Check if the answer is correct
+    // Check if the answer is correct: score
 }
 
-function moveToNextQuestion() {
+function nextQuestion() {
     // Transition to the next question or end the game if no questions left
 }
