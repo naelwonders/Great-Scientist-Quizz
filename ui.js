@@ -4,6 +4,7 @@ let title;
 let answerPanel = [];
 let rightAnswerPanel = [];
 let answerText = [];
+let textStyle;
 let fists = [];
 let moreInfoCat;
 let rectangle;
@@ -21,6 +22,13 @@ let rightColor = "#006400";
 let wrongColor = "#800020";
 let textFont = "Garamond";
 
+//texte pour la question et rep
+textStyle = {
+    fontFamily: 'Garamond',
+    fontSize: '30px',
+    fontStyle: 'bold',
+    color: textColor};
+
 function createUIElements() {
     // Display the game's title
     title = this.add.text(config.width / 2, 100, "Great Scientists", 
@@ -34,29 +42,26 @@ function createUIElements() {
     
 }
 
-function displayQuestion(context,question) {
-
-    //texte pour la question
-    let textStyle = {
-        fontFamily: 'Garamond',
-        fontSize: '30px',
-        fontStyle: 'bold',
-        color: textColor};
-    
+function displayQuestion(context,questionTitle) {
     questionTextObject = context.add.text(50, config.height / 3 - 50, "", textStyle);
 
-    let justifiedQuestion = justifyText(questionTextObject, question, config.width - 100);
+    let justifiedQuestion = justifyText(questionTextObject, questionTitle, config.width - 100);
     questionTextObject.setText(justifiedQuestion);
     
-    // // Display the answer choices
-    // for (let i = 0; i < question.answer.length; i++) {
-    //     answerText[i].text = question.answer[i];
-    //     answerText[i].setColor(textColor);
-    //     rightAnswerPanel[i].setVisible(false);
-    //     answerPanel[i].setInteractive();
-    // }
 }
 
+function displayAnswers(context, answerList) {
+    // // Display the answer choices
+    for (let i = 0; i < answerList.length; i++) {
+        answerTextObject = context.add.text( config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), answerList[i], {fontFamily: textFont, fontSize: 24, color: textColor});
+        answerTextObject.setColor(textColor);
+        answerTextObject.setOrigin(0.5, 0.5);
+
+        //TO DO: panels
+        //rightAnswerPanel[i].setVisible(false);
+        //answerPanel[i].setInteractive();
+    }
+}
 
 //this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
 function justifyText(textObject, text, maxWidth){

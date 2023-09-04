@@ -40,6 +40,8 @@ function create() {
     
     displayQuestion(this, questionJSON.questions[currentIndex].title);
     
+    displayAnswers(this,shuffleArray(questionJSON.questions[currentIndex].answer));
+    
     // Display the first question
 
     // ... other initialization logic ...
