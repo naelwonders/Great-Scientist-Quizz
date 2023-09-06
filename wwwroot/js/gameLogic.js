@@ -1,5 +1,5 @@
 
-function checkAnswer(selectedAnswer) {
+function checkAnswer(selectedAnswer, currentIndex) {
     // Check if the answer is correct: score
     for (let i = 0; i < 3; i++) 
     {
@@ -35,9 +35,7 @@ function nextQuestion() {
         // this.biohint.setVisible(false);
         
         //display next question:BUGG HERE because we don't want to display, we want to add another question (not all on top of one another)
-        displayQuestion(this, questionJSON.questions[currentIndex].title);
-
-        displayAnswers(this,shuffleArray(questionJSON.questions[currentIndex].answer));
+        
     }
 
     else if (currentIndex >= numberOfQuestions) {

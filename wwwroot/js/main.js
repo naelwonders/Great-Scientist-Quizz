@@ -16,33 +16,19 @@ let config = {
 
 let game = new Phaser.Game(config);
 
-let questionJSON;
-let numberOfQuestions;
 let currentIndex;
 let score;
-
-function loadQuestions() {
-    // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload)
-    questionJSON = this.cache.json.get('questions');
-    shuffleArray(questionJSON.questions);
-    numberOfQuestions = questionJSON.questions.length;
-}
 
 function create() {
 
     currentIndex = 0;
     score = 0;
 
-    loadQuestions.call(this);
-    
     // Initialize and display UI elements
-    createUIElements.call(this);  // "this" refers to the current scene
-    
-    displayQuestion(this, questionJSON.questions[currentIndex].title);
-    
-    //dans le display answers, il y a un lien vers le gamelogic (check answer pour l'instant)
-    displayAnswers(this,shuffleArray(questionJSON.questions[currentIndex].answer)); 
 
+    let context = this;
+
+    createUIElements(context, currentIndex, score);  // "this" refers to the current scene
     
 }
 

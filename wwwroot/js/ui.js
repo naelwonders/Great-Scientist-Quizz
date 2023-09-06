@@ -1,17 +1,19 @@
 
-let title;
 
+//--INITIALISATION DE TOUTES LES VARIABLES
+let title;
 let answerPanel = [];
 let rightAnswerPanel = [];
 let answerText = [];
-let textStyle;
+let justifiedQuestion;
 let fists = [];
-let moreInfoCat;
-let rectangle;
-let previousButton;
-let questionText = "";
 let panel;
-let hint, bioHint;
+let moreInfoCat;
+let questionText = "";
+let next;
+//let rectangle;
+//let hint, bioHint;
+//let previousButton;
 
 // Colors & Fonts
 let textColor = "#F4E3D7";
@@ -23,109 +25,66 @@ let wrongColor = "#800020";
 let textFont = "Garamond";
 
 //texte pour la question et rep
-textStyle = {
+let titleStyle = {
+    fontFamily: 'Old English Text MT', 
+    fontSize: 80, 
+    fontStyle: 'bold',
+    color: titleColor
+};
+
+let textStyle = {
     fontFamily: 'Garamond',
     fontSize: 24,
     fontStyle: 'bold',
     color: textColor};
+    
+let questionJSON;
+let numberOfQuestions;
 
-function createUIElements() {
+function createUIElements(context, currentQuestionIndex, currentScore) {
     // Display the game's title
-    title = this.add.text(config.width / 2, 100, "Great Scientists", 
-    {
-        fontFamily: 'Old English Text MT', 
-        fontSize: 80, 
-        fontStyle: 'bold',
-        color: titleColor
-    });
+    title = context.add.text(config.width / 2, 100, "Great Scientists", titleStyle);
     title.setOrigin(0.5, 0.5);
 
-    //le bouton pour passer à la prochaine question avec la fonction: nextQuestion
-    playButton = this.add.image(config.width - 70, config.height / 2 + 55, 'playButton').setInteractive();
-    playButton.on('pointerdown', nextQuestion.bind(this));
-    playButton.setScale(0.25);
-    playButton.setVisible(false) //invisible tant que pas repondu
+    // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload)
+    questionJSON = context.cache.json.get('questions');
+    shuffleArray(questionJSON.questions);
+    numberOfQuestions = questionJSON.questions.length;
 
-    next = this.add.text(config.width - 90, config.height / 2 + 55, "NEXT", 
-    {   fontFamily: 'Garamond',
-        fontSize: 24,
-        fontStyle: 'bold',
-        color: accentColor});
-
-    next.setVisible(false)
-
-}
-
-function displayQuestion(context,questionTitle) {
+    //print the question of the current index
     questionTextObject = context.add.text(50, config.height / 3 - 50, "", textStyle);
-
-    let justifiedQuestion = justifyText(questionTextObject, questionTitle, config.width - 100);
+    justifiedQuestion = justifyText(questionTextObject, questionJSON.questions[currentQuestionIndex].title, config.width - 100);
     questionTextObject.setText(justifiedQuestion);
-    
-}
 
-function displayAnswers(context, answerList) {
-    
+    let answerList = questionJSON.questions[currentQuestionIndex].answer;
+
     // Display the answer choices
     for (let i = 0; i < answerList.length; i++) {
         answerPanel[i] = context.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), 'answer').setInteractive();
-        answerPanel[i].on('pointerdown', () => {checkAnswer(answerList[i]).bind(this)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
+        answerPanel[i].on('pointerdown', () => {checkAnswer(answerList[i], currentQuestionIndex)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
         answerPanel[i].alpha = 0.5;
         answerPanel[i].setScale(0.7);
 
         //Texte
         answerTextObject = context.add.text( config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), answerList[i], {fontFamily: textFont, fontSize: 24, color: textColor});
         answerTextObject.setColor(textColor);
-        answerTextObject.setOrigin(0.5, 0.5);
+        answerTextObject.setOrigin(0.5, 0.5);}
 
-    }
+        //le bouton pour passer à la prochaine question avec la fonction: nextQuestion
+        playButton = context.add.image(config.width - 70, config.height / 2 + 65, 'playButton').setInteractive();
+        playButton.on('pointerdown', nextQuestion);
+        playButton.setScale(0.25);
+        playButton.setVisible(false) //invisible tant que pas repondu
+
+        next = context.add.text(config.width - 70, config.height / 2 + 35, "N\nE\nX\nT", 
+        {   fontFamily: 'Garamond',
+        fontSize: 20,
+        fontStyle: 'bold',
+        color: accentColor});
+
+        next.setVisible(false)
+
+
 }
 
-//this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
-function justifyText(textObject, text, maxWidth){
-    const words = text.split(' ');
-    let space = " "
-    let currentLine = words[0];
-    let justifiedText = "";
-    
-    //measure space width: BUGG
-    textObject.setText(' ');
-    const spaceWidth = textObject.width;
-    
-    for (let i = 1; i < words.length; i++) {
-        let potentialLine = currentLine + space + words[i];
-        textObject.setText(potentialLine)
-        //si la longueure en pixels de la chaine de characters (potential)
-        
-        if (textObject.width <= maxWidth) {
-            currentLine = potentialLine;
-        } 
-        else {
-            textObject.setText(currentLine)
-            let extraSpacePixels = maxWidth - textObject.width; 
-            
-            let numSpacesInLine = currentLine.split(' ').length - 1;
-            let spacesToAdd = Math.floor(extraSpacePixels / (spaceWidth * numSpacesInLine));
-            let remainingSpaces = extraSpacePixels - (spacesToAdd * spaceWidth * numSpacesInLine);
-            
-            let newWords = currentLine.split(' ');
-            
-            currentLine = newWords[0];
-            for (let j = 1; j < newWords.length; j++) {
-                let additionalSpace = spacesToAdd;
-                if (remainingSpaces > 0) {
-                    additionalSpace++;
-                    remainingSpaces -= spaceWidth;
-                }
-                currentLine += ' '.repeat(1 + additionalSpace) + newWords[j];
-            }
-            
-            justifiedText += currentLine + "\n";
-            currentLine = words[i];
-        }
-    }
-    justifiedText += currentLine;  // add the last line
-    
-    return justifiedText;
-}
 
