@@ -16,34 +16,28 @@ function checkAnswer(selectedAnswer) {
         
         playButton.setVisible(true);
         next.setVisible(true);
-        // hint.setVisible(false)
     }
 }
 
 function nextQuestion() {
     currentIndex ++;
-    playButton.setVisible(false)
+    playButton.setVisible(false);
+    next.setVisible(false);
     
     if (currentIndex < numberOfQuestions) {
-        moreInfoCat.setVisible(true);
-        hint.setVisible(true);
-        this.scientistImage.setTexture('scientist' + currentIndex.toString());   
         
-        //function justifyText for both question and bio
-        let justifiedContent = justifyText(this.questionText,questionJSON.questions[currentIndex].title, config.width - 100);
-        this.questionText.setText(justifiedContent); 
+        //HINT SECTION TO DO
+        // moreInfoCat.setVisible(true);
+        // hint.setVisible(true);
+        //this.scientistImage.setTexture('scientist' + currentIndex.toString());   
+        // let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
+        // this.bioHint.setText(justifiedBio); 
+        // this.biohint.setVisible(false);
+        
+        //display next question:BUGG HERE because we don't want to display, we want to add another question (not all on top of one another)
+        displayQuestion(this, questionJSON.questions[currentIndex].title);
 
-        let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
-        this.bioHint.setText(justifiedBio); 
-        this.biohint.setVisible(false);
-
-        //ajout des prochaines réponses avec les panels
-        for (let i = 0; i < 3; i++) {
-            answerText[i].text = questionJSON.questions[currentIndex].answer[i];
-            answerText[i].setColor(textColor);
-            rightAnswerPanel[i].setVisible(false);
-            answerPanel[i].setInteractive();
-        }
+        displayAnswers(this,shuffleArray(questionJSON.questions[currentIndex].answer));
     }
 
     else if (currentIndex >= numberOfQuestions) {
@@ -58,9 +52,9 @@ function nextQuestion() {
             answerPanel[i].setVisible(false);
         }
         
-        //remove hint option
-        moreInfoCat.setVisible(false);
-        hint.setVisible(false);
+        //REMOVE HINT ELEMENTS
+        // moreInfoCat.setVisible(false);
+        // hint.setVisible(false);
 
     }
 }
