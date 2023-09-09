@@ -4,6 +4,7 @@ function preload() {
     this.load.image('question', '../assets/Sprites/Label1.png');
     this.load.image('answer', '../assets/Sprites/tile.png');
     this.load.image('rightanswer', '../assets/Sprites/greenTile.png');
+    this.load.image('wronganswer', '../assets/Sprites/redTile.png');
 
     this.load.image('fist', '../assets/Sprites/fist.png');
     this.load.image('playButton', '../assets/Sprites/cat.png');

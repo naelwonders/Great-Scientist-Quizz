@@ -1,10 +1,8 @@
 
-
 //--INITIALISATION DE TOUTES LES VARIABLES
 let title;
 let answerPanel = [];
-let rightAnswerPanel = [];
-let answerText = [];
+let answerList = [];
 let justifiedQuestion;
 let fists = [];
 let panel;
@@ -29,61 +27,74 @@ let titleStyle = {
     fontFamily: 'Old English Text MT', 
     fontSize: 80, 
     fontStyle: 'bold',
-    color: titleColor
-};
+    color: titleColor}
 
 let textStyle = {
     fontFamily: 'Garamond',
     fontSize: 24,
     fontStyle: 'bold',
-    color: textColor};
-    
-let questionJSON;
-let numberOfQuestions;
+    color: textColor}
 
-function createUIElements(context, currentQuestionIndex, currentScore) {
+let nextStyle = {   
+    fontFamily: 'Garamond',
+    fontSize: 20,
+    fontStyle: 'bold',
+    color: accentColor}
+
+let answerStyle = {
+    fontFamily: textFont, 
+    fontSize: 24, 
+    color: textColor}
+
+//DISPLAY TITLE OF THE GAME, THROUGHOUT THE GAME
+function displayTitle(context){
     // Display the game's title
-    title = context.add.text(config.width / 2, 100, "Great Scientists", titleStyle);
+    title = context.add.text(config.width / 2, 100, "Great Scientists\nQuizz - Question", titleStyle);
+    //+ (currentIndex + 1).toString() a ajouter pour le no de la question
     title.setOrigin(0.5, 0.5);
+}
 
-    // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload)
-    questionJSON = context.cache.json.get('questions');
-    shuffleArray(questionJSON.questions);
-    numberOfQuestions = questionJSON.questions.length;
 
+function displayQuestion(context){
+    //QUESTION : do I use function that return the current question in gamelogic??
     //print the question of the current index
     questionTextObject = context.add.text(50, config.height / 3 - 50, "", textStyle);
-    justifiedQuestion = justifyText(questionTextObject, questionJSON.questions[currentQuestionIndex].title, config.width - 100);
+    justifiedQuestion = justifyText(questionTextObject, getCurrentQuestion(), config.width - 100);
     questionTextObject.setText(justifiedQuestion);
 
-    let answerList = questionJSON.questions[currentQuestionIndex].answer;
+}
 
-    // Display the answer choices
+function displayAnswers(context){
+    
+    answerList = getCurrentAnswerList();
+    
+    // Display panels and the answers in the list
     for (let i = 0; i < answerList.length; i++) {
+        
+        //Place the planel and make it interactive to checkAnswer(answer, index)
         answerPanel[i] = context.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), 'answer').setInteractive();
-        answerPanel[i].on('pointerdown', () => {checkAnswer(answerList[i], currentQuestionIndex)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
+        answerPanel[i].on('pointerdown', () => {checkAnswer(answerList[i], i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
+       
         answerPanel[i].alpha = 0.5;
         answerPanel[i].setScale(0.7);
-
-        //Texte
-        answerTextObject = context.add.text( config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), answerList[i], {fontFamily: textFont, fontSize: 24, color: textColor});
+        
+        //Place the answers on the panels
+        answerTextObject = context.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), answerList[i], answerStyle);
         answerTextObject.setColor(textColor);
         answerTextObject.setOrigin(0.5, 0.5);}
 
-        //le bouton pour passer à la prochaine question avec la fonction: nextQuestion
+}
+function displayNextButtonCat(context) {
+        
+        //Playbutton set interactive to the nextQuestion function
         playButton = context.add.image(config.width - 70, config.height / 2 + 65, 'playButton').setInteractive();
-        playButton.on('pointerdown', nextQuestion);
+        playButton.on('pointerdown', () => {nextQuestion}); // attention, si tu ne passe rien en parametre, il ne faut pas mettre les parentheses (je ne comprend pas pourquoi)
         playButton.setScale(0.25);
         playButton.setVisible(false) //invisible tant que pas repondu
 
-        next = context.add.text(config.width - 70, config.height / 2 + 35, "N\nE\nX\nT", 
-        {   fontFamily: 'Garamond',
-        fontSize: 20,
-        fontStyle: 'bold',
-        color: accentColor});
+        next = context.add.text(config.width - 70, config.height / 2 + 35, "N\nE\nX\nT", nextStyle);
 
         next.setVisible(false)
-
 
 }
 
