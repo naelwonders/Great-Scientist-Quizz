@@ -2,13 +2,14 @@
 //--INITIALISATION DE TOUTES LES VARIABLES
 let title;
 let answerPanel = [];
-let answerList = [];
 let justifiedQuestion;
+let answerList;
 let fists = [];
 let panel;
 let moreInfoCat;
 let questionText = "";
 let next;
+let playButton;
 //let rectangle;
 //let hint, bioHint;
 //let previousButton;
@@ -29,11 +30,18 @@ let titleStyle = {
     fontStyle: 'bold',
     color: titleColor}
 
+let subStyle = {
+    fontFamily: 'Old English Text MT', 
+    fontSize: 40, 
+    fontStyle: 'bold',
+    color: titleColor}
+
 let textStyle = {
     fontFamily: 'Garamond',
     fontSize: 24,
     fontStyle: 'bold',
     color: textColor}
+
 
 let nextStyle = {   
     fontFamily: 'Garamond',
@@ -49,9 +57,12 @@ let answerStyle = {
 //DISPLAY TITLE OF THE GAME, THROUGHOUT THE GAME
 function displayTitle(context){
     // Display the game's title
-    title = context.add.text(config.width / 2, 100, "Great Scientists\nQuizz - Question", titleStyle);
-    //+ (currentIndex + 1).toString() a ajouter pour le no de la question
+    title = context.add.text(config.width / 2, 80, "Great Scientists", titleStyle);
     title.setOrigin(0.5, 0.5);
+
+    subtitle = context.add.text(config.width / 2, 130, "<<<   Quizz - Question " + (currentIndex + 1).toString() + "   >>>", subStyle);
+    //+ (currentIndex + 1).toString() a ajouter pour le no de la question
+    subtitle.setOrigin(0.5, 0.5);
 }
 
 
@@ -66,8 +77,8 @@ function displayQuestion(context){
 
 function displayAnswers(context){
     
-    answerList = getCurrentAnswerList();
-    
+    answerList = getCurrentAnswerList()
+
     // Display panels and the answers in the list
     for (let i = 0; i < answerList.length; i++) {
         
@@ -88,9 +99,11 @@ function displayNextButtonCat(context) {
         
         //Playbutton set interactive to the nextQuestion function
         playButton = context.add.image(config.width - 70, config.height / 2 + 65, 'playButton').setInteractive();
+        // place the button that allows the player to switch to the next quesition
         playButton.on('pointerdown', () => {nextQuestion}); // attention, si tu ne passe rien en parametre, il ne faut pas mettre les parentheses (je ne comprend pas pourquoi)
+        
         playButton.setScale(0.25);
-        playButton.setVisible(false) //invisible tant que pas repondu
+        //playButton.setVisible(false) //invisible tant que pas repondu
 
         next = context.add.text(config.width - 70, config.height / 2 + 35, "N\nE\nX\nT", nextStyle);
 

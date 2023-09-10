@@ -77,6 +77,8 @@ function preload() {
     
     //telecharger le fichier JSON
     this.load.json('questions', './assets/data/Questions.json');
+
+    //this.load.json('questions', 'http://127.0.0.1:8000/questions'); si on veut faire un lien avec le webservice en lien avec notre mongo db
    
 }
 
@@ -130,7 +132,7 @@ function create() {
         answerPanel[i].alpha = 0.5;
         answerPanel[i].setScale(0.7);
         
-        //le texte de reponse est ajouté en fonction du fichier JASON et du current Index
+        //le texte de reponse est ajouté en fonction du fichier JSON et du current Index
         answerText[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), choice, {fontFamily: textFont, fontSize: 24, color: textColor});
         answerText[i].setOrigin(0.5, 0.5);
     }   

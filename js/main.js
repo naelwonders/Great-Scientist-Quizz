@@ -24,9 +24,6 @@ function create() {
     
     loadQuestionsFromJSON(this);
 
-    currentQuestion = getCurrentQuestion();
-    currentAnswerList = getCurrentAnswerList();
-
     displayTitle(this);
     displayQuestion(this);
     displayAnswers(this);// --> set interactive to checkAnswer()

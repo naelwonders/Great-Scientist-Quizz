@@ -1,6 +1,5 @@
 let questionJSON;
 let numberOfQuestions;
-let answerList;
 let currentIndex = 0;
 let score = 0;
 
@@ -38,7 +37,7 @@ function checkAnswer(answerText, answerIndex) {
     for (let i = 0; i < 3; i++) {
         answerPanel[i].removeInteractive();
     }
-    // place the button that allows the player to switch to the next quesition
+    
     playButton.setVisible(true);
     next.setVisible(true);
     }
@@ -46,17 +45,20 @@ function checkAnswer(answerText, answerIndex) {
 
 function nextQuestion() {
     currentIndex ++;
-    //remove the possibility to skip questions without answering
+    console.log(currentIndex);
+    //remove the possibility to skip questions without answering by removing the next button cat
     playButton.setVisible(false);
     next.setVisible(false);
     
     //if QUIZZ not finished
     if (currentIndex < numberOfQuestions) {
+
+        playButton.setVisible(true);
+        next.setVisible(true);
         
-        //update the question
-        getCurrentQuestion();
         for (let i = 0; i < 3; i++) {
-            answerList[i].setTexture() = questionJSON.questions[currentIndex].answer;
+            //remettre interactive car desactivé en checkant la réponse
+            answerPanel[answerIndex].setTexture("answer");
             answerPanel[i].setInteractive();
         }
         //HINT SECTION TO DO
@@ -65,12 +67,10 @@ function nextQuestion() {
         //this.scientistImage.setTexture('scientist' + currentIndex.toString());   
         // let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
         // this.bioHint.setText(justifiedBio); 
-        // this.biohint.setVisible(false);
-  
-        
+        // this.biohint.setVisible(false);        
     }
     //if QUIZZ finished
-    if (currentIndex >= numberOfQuestions) {
+    else if (currentIndex >= numberOfQuestions) {
         //replace the question with the score
         this.questionText.text = "Your final score is " + score.toString() + " / " + numberOfQuestions;
         this.questionText.setPosition(config.width/2, config.height/2)
