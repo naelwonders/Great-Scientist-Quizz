@@ -20,5 +20,7 @@ function preload() {
     
     //telecharger le fichier JSON
     this.load.json('questions', '/assets/data/Questions.json');
+
+    
    
 }

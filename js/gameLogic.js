@@ -4,20 +4,30 @@ let currentIndex = 0;
 let score = 0;
 
 function loadQuestionsFromJSON(context){
+    
     // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload)
     questionJSON = context.cache.json.get('questions');
     shuffleArray(questionJSON.questions);
     numberOfQuestions = questionJSON.questions.length;
+    
 }
 
-
+//returns the current question in string format from the JSON 
 function getCurrentQuestion() {
-    return questionJSON.questions[currentIndex].title;
+    if (questionJSON) {
+        return questionJSON.questions[currentIndex].title;
+    } else {
+        console.error("questionJSON is undefined");
+    }
 }
 
+//returns the list of answers in string format from the JSON
 function getCurrentAnswerList() {
-    //returns the list of answers from the JSON
-    return questionJSON.questions[currentIndex].answer;
+    if (questionJSON) {
+        return questionJSON.questions[currentIndex].answer;
+    } else {
+        console.error("questionJSON is undefined");
+    }
 }
 
 
@@ -38,27 +48,29 @@ function checkAnswer(answerText, answerIndex) {
         answerPanel[i].removeInteractive();
     }
     
-    playButton.setVisible(true);
-    next.setVisible(true);
+    nextButton.setVisible(true);
+    nextText.setVisible(true);
     }
 
 
 function nextQuestion() {
     currentIndex ++;
-    console.log(currentIndex);
     //remove the possibility to skip questions without answering by removing the next button cat
-    playButton.setVisible(false);
-    next.setVisible(false);
-    
+    nextButton.setVisible(false);
+    nextText.setVisible(false);
+
     //if QUIZZ not finished
     if (currentIndex < numberOfQuestions) {
+        questionText.setText(questionJSON.questions[currentIndex].title);
 
-        playButton.setVisible(true);
-        next.setVisible(true);
+        //PLAN:
+        // il faut que je puissechanger la texture du gameobject avec la forme justifiée du texte de la prochaine question et BASTA 
+        //questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
+        questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
         
         for (let i = 0; i < 3; i++) {
             //remettre interactive car desactivé en checkant la réponse
-            answerPanel[answerIndex].setTexture("answer");
+            answerPanel[i].setTexture("answer");
             answerPanel[i].setInteractive();
         }
         //HINT SECTION TO DO
@@ -71,20 +83,6 @@ function nextQuestion() {
     }
     //if QUIZZ finished
     else if (currentIndex >= numberOfQuestions) {
-        //replace the question with the score
-        this.questionText.text = "Your final score is " + score.toString() + " / " + numberOfQuestions;
-        this.questionText.setPosition(config.width/2, config.height/2)
-        this.questionText.setOrigin(0.5,0.5)
-
-        //make the answers and pannels dissappear
-        for (let i = 0; i < 3; i++) {
-            answerText[i].setVisible(false);
-            answerPanel[i].setVisible(false);
-        }
-        
-        //REMOVE HINT ELEMENTS
-        // moreInfoCat.setVisible(false);
-        // hint.setVisible(false);
-
+        removeGameAssets();
     }
 }

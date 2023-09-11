@@ -16,18 +16,14 @@ let config = {
 
 let game = new Phaser.Game(config);
 
-let currentQuestion;
-let currentAnswerList = [];
-//let currentHint = []; pour après
 
 function create() {
-    
     loadQuestionsFromJSON(this);
 
+    //afficher tous les elements dans la scene
     displayTitle(this);
-    displayQuestion(this);
-    displayAnswers(this);// --> set interactive to checkAnswer()
-    displayNextButtonCat(this); // --> set interactive to nextQuestion()
+    displayInteractiveAnswers(this);
+    displayQuestionAndNextButton(this);
     
 }
 
