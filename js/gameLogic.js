@@ -61,12 +61,12 @@ function nextQuestion() {
 
     //if QUIZZ not finished
     if (currentIndex < numberOfQuestions) {
-        questionText.setText(questionJSON.questions[currentIndex].title);
+        questionTextObject.setText(questionJSON.questions[currentIndex].title);
 
         //PLAN:
         // il faut que je puissechanger la texture du gameobject avec la forme justifiée du texte de la prochaine question et BASTA 
         //questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
-        questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
+        
         
         for (let i = 0; i < 3; i++) {
             //remettre interactive car desactivé en checkant la réponse

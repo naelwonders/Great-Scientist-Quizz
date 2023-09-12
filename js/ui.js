@@ -55,16 +55,8 @@ let answerStyle = {
     fontSize: 24, 
     color: textColor}
 
-//DISPLAY TITLE OF THE GAME, THROUGHOUT THE GAME
-function displayTitle(context){
-    // Display the game's title
-    title = context.add.text(config.width / 2, 80, "Great Scientists", titleStyle);
-    title.setOrigin(0.5, 0.5);
 
-    subtitle = context.add.text(config.width / 2, 130, "<<<   Quizz - Question " + (currentIndex + 1).toString() + "   >>>", subStyle);
-    //+ (currentIndex + 1).toString() a ajouter pour le no de la question
-    subtitle.setOrigin(0.5, 0.5);
-}
+
 
 
 function displayInteractiveAnswers(context){
@@ -93,7 +85,7 @@ function displayInteractiveAnswers(context){
         
 
         //PLAN:
-        // il faut que je puissechanger la texture du gameobject avec la forme justifiée du texte de la prochaine question
+        // il faut que je puisse changer la texture du gameobject avec la forme justifiée du texte de la prochaine question
         //questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
 
         // ICI 
@@ -104,9 +96,8 @@ function displayInteractiveAnswers(context){
             //on sort un chaine de caractères
         
         //the question is added, the question logic is linked to the next question
-        questionTextObject = context.add.text(50, config.height / 3 - 50, " ", textStyle);
         
-        questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
+        questionTextObject.setText(questionJSON.questions[currentIndex].title);
         
         //Playbutton set interactive to the nextQuestion function
         nextButton = context.add.image(config.width - 70, config.height / 2 + 65, 'playButton').setInteractive();

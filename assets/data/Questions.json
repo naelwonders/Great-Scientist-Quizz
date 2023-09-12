@@ -1,49 +1,49 @@
 {
     "questions": [
         {
-            "title": "Who conducted pioneering research on radioactivity and earned two Nobel Prizes for contributions to understanding atomic properties?",
+            "title": "Who conducted pioneering research on radio-\nactivity and earned two Nobel Prizes for\ncontributions to understanding atomic properties?",
             "answer": ["Marie Curie", "Eleonore Paprika", "Géraldine Poivrette"],
             "goodAnswer": "Marie Curie", 
             "bio": "Born in Poland and emerging as a prominent figure in the late 19th century, this scientist's profound investigations into radioactivity reshaped the field of atomic science. Their groundbreaking discoveries not only laid the groundwork for modern understandings of radiation but also earned them the distinction of being a double Nobel laureate. Such a remarkable achievement underscores their dedication and transformative impact on the world of science."
         },
         {
-            "title": "Who made significant contributions to the understanding of molecular structures, including in uncovering the DNA double helix?",
+            "title": "Who made significant contributions to under-\nstanding molecular structures, including in\nuncovering the DNA double helix?",
             "answer": ["Fleur Adamson", "Rosalind Franklin", "Lilly Allen"],
             "goodAnswer": "Rosalind Franklin",
             "bio": "Emerging as a scientific force in the mid-20th century in England, this brilliant mind's mastery of X-ray crystallography unraveled the intricate structure of DNA's double helix. Beyond her groundbreaking work on DNA, she also explored the structural complexities of viruses and other biological molecules. Despite her pivotal contributions, her name was often obscured, yet her legacy endures in the realm of genetics and molecular biology."
         },
         {
-            "title": "Which mathematician's calculations were pivotal in launching the first American astronauts into space?",
+            "title": "Which mathematician's calculations were pivotal\nin launching the first American astronauts into\nspace?",
             "answer": ["Kelly Thomson", "Katherine Johnson", "Your granny"],
             "goodAnswer": "Katherine Johnson",
-            "bio": "A mathematical luminary of the 20th century, this scientist's calculations were the unsung heroes behind the success of the first American spaceflights. Their precise mathematical work ensured the trajectories of astronauts were accurate and safe, marking a significant milestone in space exploration. Amidst challenges, their contributions stood as a testament to the power of determination and intellect, reshaping our understanding of the cosmos."
+            "bio": "A mathematical luminary of the 20th century,\nthis scientist's calculations were the unsung heroes behind the success of the first American spaceflights. Their precise mathematical work ensured the trajectories of astronauts were accurate and safe, marking a significant milestone in space exploration. Amidst challenges, their contributions stood as a testament to the power of determination and intellect, reshaping our understanding of the cosmos."
         },
         {
-            "title": "Who is often regarded as the world's first computer programmer? This, before the first computers emerged.",
+            "title": "Who  is  often  regarded  as the  world's  first\ncomputer  programmer? This, before the first\ncomputers emerged.",
             "answer": ["Luna Lovegood", "Goodie Osborn", "Ada Lovelace"],
             "goodAnswer": "Ada Lovelace",
             "bio": "Emerging in the 19th century England, this mathematician's innovative insights transcended the boundaries of her time. Collaborating with Charles Babbage, she envisioned a machine that could process not only numbers but also symbols and instructions, laying the foundation for modern computer programming. Her visionary work opened a realm of possibilities, influencing generations of innovators to shape the digital age."
         },
         {
-            "title": "Who was a movie-star and the co-inventor of a frequency-hopping system that laid the groundwork for modern wireless technologies?",
+            "title": "Who was a movie-star and the co-inventor of a\nfrequency-hopping system that laid the ground-\nwork for modern wireless technologies?",
             "answer": ["Hedy Lamarr", "Kate Winslet", "Lady Gaga"],
             "goodAnswer": "Hedy Lamarr",
             "bio": "Born in 1914 in Austria, this multifaceted individual's ingenuity extended beyond the silver screen. Collaborating with a composer, she developed a frequency-hopping system to prevent radio-guided torpedoes from being jammed by enemies. This invention, though initially overlooked, served as a precursor to today's technologies, including Bluetooth and Wi-Fi. A true visionary, she demonstrated that brilliance could span diverse realms and forever shape the course of innovation.   to secure communication during World War II"
         },
         {
-            "title": "Who played a pivotal role in confirming a fundamental theory in particle physics through a groundbreaking experiment during the 20th century?",
+            "title": "Who  played  a  pivotal  role in confirming a\nfundamental theory in particle physics through a\ngroundbreaking experiment during the 20th century?",
             "answer": ["Chien-Shiung Wu", "Autre lala", "Chien-Shiung Wu (1912-1997)"],
             "goodAnswer": "Chien-Shiung",
             "bio": "A force in the realm of physics, this scientist's contribution to the field extended beyond the confines of her laboratory. Through her meticulous experiment, she provided crucial evidence for the theory of weak interaction in particle physics, challenging conventional norms. Her innovative methods and fearless pursuit of truth reshaped our understanding of fundamental forces, leaving an indelible mark on the world of physics."
         },
         {
-            "title": "Which pioneering mathematician made significant advancements in the field of partial differential equations?",
+            "title": "Which pioneering mathematician made significant\nadvancements in the field of partial differential\nequations?",
             "answer": ["Sofia Kovalevskaya", "C'est pas elle...", "Sofia Kovalevskaya (1850-1891)"],
             "goodAnswer": "Sofia Kovalevskaya (1850-1891)",
             "bio": "Born in 1850 in Russia, this mathematician made notable contributions to mathematical analysis and was the first woman in Europe to receive a doctorate in mathematics."
         },
         {
-            "title": "Which scholar excelled in mathematics, astronomy, and philosophy, leaving an enduring legacy in the ancient world?",
+            "title": "Which scholar excelled in mathematics, astronomy,\nand philosophy, leaving an enduring legacy in the\nancient world?",
             "answer": ["Hypatia of Alexandria (circa 360-415)", "Hypatia of Alexandria (circa 360-415)", "Hypatia of Alexandria (circa 360-415)"],
             "goodAnswer": "Hypatia of Alexandria",
             "bio": "Born around 360 CE and emerging in the ancient city of Alexandria, this exceptional mind stood at the intersection of mathematics, astronomy, and philosophy. Her intellectual prowess challenged societal norms, breaking through barriers to excel in traditionally male-dominated fields. A symbol of wisdom and resilience, her legacy continues to inspire scholars and thinkers across the ages."
