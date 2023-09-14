@@ -55,6 +55,8 @@ function checkAnswer(answerText, answerIndex) {
 
 function nextQuestion() {
     currentIndex ++;
+
+    subtitle.setText("Quizz - Question " + (currentIndex + 1).toString());
     //remove the possibility to skip questions without answering by removing the next button cat
     nextButton.setVisible(false);
     nextText.setVisible(false);
@@ -62,16 +64,17 @@ function nextQuestion() {
     //if QUIZZ not finished
     if (currentIndex < numberOfQuestions) {
         questionTextObject.setText(questionJSON.questions[currentIndex].title);
-
-        //PLAN:
-        // il faut que je puissechanger la texture du gameobject avec la forme justifiée du texte de la prochaine question et BASTA 
-        //questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
         
+        answerList = [
+            questionJSON.questions[currentIndex].answer[0],
+            questionJSON.questions[currentIndex].answer[1],
+            questionJSON.questions[currentIndex].answer[2]];
         
         for (let i = 0; i < 3; i++) {
             //remettre interactive car desactivé en checkant la réponse
             answerPanel[i].setTexture("answer");
             answerPanel[i].setInteractive();
+            answerTextObject[i].setText(answerList[i]);
         }
         //HINT SECTION TO DO
         //moreInfoCat.setVisible(true);
@@ -84,5 +87,7 @@ function nextQuestion() {
     //if QUIZZ finished
     else if (currentIndex >= numberOfQuestions) {
         removeGameAssets();
+        scoreMessage.setText("Your score is " + score + "/" + numberOfQuestions)
+  
     }
 }

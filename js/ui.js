@@ -3,6 +3,7 @@
 let title;
 let questionTextObject;
 let answerPanel = [];
+let answerTextObject = [];
 let justifiedQuestion;
 let answerList;
 let fists = [];
@@ -11,6 +12,7 @@ let moreInfoCat;
 let questionText;
 let nextText;
 let nextButton;
+let scoreMessage;
 //let rectangle;
 //let hint, bioHint;
 //let previousButton;
@@ -56,70 +58,15 @@ let answerStyle = {
     color: textColor}
 
 
-
-
-
-function displayInteractiveAnswers(context){
     
-    answerList = questionJSON.questions[currentIndex].answer;
-    
-    // Display panels and the answers in the list
-    for (let i = 0; i < answerList.length; i++) {
-        
-        //Place the planel and make it interactive to checkAnswer(answer, index)
-        answerPanel[i] = context.add.image((config.width / 2) , (config.height * 0.3) + 40+ (80 *(i + 1)), 'answer').setInteractive();
-        answerPanel[i].on('pointerdown', () => {checkAnswer(answerList[i], i)}) //définir une fonction sans nom, on met juste la parenthese avec la fleche (car on est obligé de mettre une fonction dans cette methode)
-        
-        answerPanel[i].alpha = 0.5;
-        answerPanel[i].setScale(0.7);
-        
-        //Place the answers on the panels
-        answerTextObject = context.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), answerList[i], answerStyle);
-        answerTextObject.setColor(textColor);
-        answerTextObject.setOrigin(0.5, 0.5);}
-        
-    }
-    
-    //next button is a cat :)
-    function displayQuestionAndNextButton(context) {
-        
-
-        //PLAN:
-        // il faut que je puisse changer la texture du gameobject avec la forme justifiée du texte de la prochaine question
-        //questionTextObject.setText(justifyText(questionJSON.questions[currentIndex].title));
-
-        // ICI 
-        //je dois chercher le texte qu'il faut mtn : questionJSON.questions[currentIndex].title
-        // le justifier:
-            //on entre une chaine de caractères et on ajoute un espace à la fin de la chaine
-            //on creer un faut gameobject pour mesurer la taille d'un empty comme ref (textObject)
-            //on sort un chaine de caractères
-        
-        //the question is added, the question logic is linked to the next question
-        
-        questionTextObject.setText(questionJSON.questions[currentIndex].title);
-        
-        //Playbutton set interactive to the nextQuestion function
-        nextButton = context.add.image(config.width - 70, config.height / 2 + 65, 'playButton').setInteractive();
-        // place the button that allows the player to switch to the next quesition
-        nextButton.on('pointerdown', () => {nextQuestion();}); // attention, si tu ne passe rien en parametre, il ne faut pas mettre les parentheses (je ne comprend pas pourquoi)
-        
-        nextButton.setScale(0.25);
-        //playButton.setVisible(false) //invisible tant que pas repondu
-        
-        nextText = context.add.text(config.width - 70, config.height / 2 + 35, "N\nE\nX\nT", nextStyle);
-        
-        nextText.setVisible(false);
-        
-    }
-    //ELEMENTS TO REMOVE WHEN GAME IS OVER
+//ELEMENTS TO REMOVE WHEN GAME IS OVER
 function removeGameAssets(){
 
     //remove quesion
     questionTextObject.setVisible(false);
     //remove answers
     for (let i = 0; i < 3; i++) {
-        answerText[i].setVisible(false);
+        answerTextObject[i].setVisible(false);
         answerPanel[i].setVisible(false);
     }
 

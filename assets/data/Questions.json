@@ -26,25 +26,25 @@
         },
         {
             "title": "Who was a movie-star and the co-inventor of a\nfrequency-hopping system that laid the ground-\nwork for modern wireless technologies?",
-            "answer": ["Hedy Lamarr", "Kate Winslet", "Lady Gaga"],
+            "answer": ["Hedy Lamarr", "Brigitte Bardot", "Audrey Hepburn"],
             "goodAnswer": "Hedy Lamarr",
             "bio": "Born in 1914 in Austria, this multifaceted individual's ingenuity extended beyond the silver screen. Collaborating with a composer, she developed a frequency-hopping system to prevent radio-guided torpedoes from being jammed by enemies. This invention, though initially overlooked, served as a precursor to today's technologies, including Bluetooth and Wi-Fi. A true visionary, she demonstrated that brilliance could span diverse realms and forever shape the course of innovation.   to secure communication during World War II"
         },
         {
             "title": "Who  played  a  pivotal  role in confirming a\nfundamental theory in particle physics through a\ngroundbreaking experiment during the 20th century?",
             "answer": ["Chien-Shiung Wu", "Autre lala", "Chien-Shiung Wu (1912-1997)"],
-            "goodAnswer": "Chien-Shiung",
+            "goodAnswer": "Chien-Shiung Wu",
             "bio": "A force in the realm of physics, this scientist's contribution to the field extended beyond the confines of her laboratory. Through her meticulous experiment, she provided crucial evidence for the theory of weak interaction in particle physics, challenging conventional norms. Her innovative methods and fearless pursuit of truth reshaped our understanding of fundamental forces, leaving an indelible mark on the world of physics."
         },
         {
             "title": "Which pioneering mathematician made significant\nadvancements in the field of partial differential\nequations?",
             "answer": ["Sofia Kovalevskaya", "C'est pas elle...", "Sofia Kovalevskaya (1850-1891)"],
-            "goodAnswer": "Sofia Kovalevskaya (1850-1891)",
+            "goodAnswer": "Sofia Kovalevskaya",
             "bio": "Born in 1850 in Russia, this mathematician made notable contributions to mathematical analysis and was the first woman in Europe to receive a doctorate in mathematics."
         },
         {
             "title": "Which scholar excelled in mathematics, astronomy,\nand philosophy, leaving an enduring legacy in the\nancient world?",
-            "answer": ["Hypatia of Alexandria (circa 360-415)", "Hypatia of Alexandria (circa 360-415)", "Hypatia of Alexandria (circa 360-415)"],
+            "answer": ["Hypatia of Alexandria", "Hypatia of Alexandria (circa 360-415)", "Kassandra Misthios"],
             "goodAnswer": "Hypatia of Alexandria",
             "bio": "Born around 360 CE and emerging in the ancient city of Alexandria, this exceptional mind stood at the intersection of mathematics, astronomy, and philosophy. Her intellectual prowess challenged societal norms, breaking through barriers to excel in traditionally male-dominated fields. A symbol of wisdom and resilience, her legacy continues to inspire scholars and thinkers across the ages."
         }
