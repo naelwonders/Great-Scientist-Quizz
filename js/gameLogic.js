@@ -79,7 +79,7 @@ function nextQuestion() {
         //HINT SECTION TO DO
         //moreInfoCat.setVisible(true);
         
-        //this.scientistImage.setTexture('scientist' + currentIndex.toString());   
+        scientistImage.setTexture('scientist' + currentIndex.toString());
         // let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
         // this.bioHint.setText(justifiedBio); 
         // this.biohint.setVisible(false);        
@@ -93,4 +93,18 @@ function nextQuestion() {
         scoreMessage.setText("Your score is " + score + "/" + numberOfQuestions)
   
     }
+}
+
+function displayHint(){
+    scientistImage.setVisible(true);
+    rectangle.setVisible(true);
+    previousButton.setVisible(true);
+    
+}
+
+function removeHint(){
+    scientistImage.setVisible(false);
+    rectangle.setVisible(false);
+    previousButton.setVisible(false);
+    
 }

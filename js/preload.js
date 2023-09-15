@@ -8,7 +8,7 @@ function preload() {
 
     this.load.image('fist', '../assets/Sprites/fist.png');
     this.load.image('playButton', '../assets/Sprites/cat.png');
-    this.load.image('previousButton', '../assets/Sprites/Back.png');
+    this.load.image('previousButton', '../assets/Sprites/cat.png');
     this.load.image('crystalBall', '../assets/Sprites/crystalBall2.png');
 
     //images and assets for the more info file page

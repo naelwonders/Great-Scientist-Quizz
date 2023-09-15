@@ -14,9 +14,10 @@ let nextText;
 let nextButton;
 let scoreMessage;
 let hintText;
-//let rectangle;
+let scientistImage;
+let rectangle;
+let previousButton;
 //let bioHint;
-//let previousButton;
 
 // Colors & Fonts
 let textColor = "#F4E3D7";
