@@ -57,9 +57,9 @@ function nextQuestion() {
     currentIndex ++;
 
     subtitle.setText("Quizz - Question " + (currentIndex + 1).toString());
-    //remove the possibility to skip questions without answering by removing the next button cat
-    nextButton.setVisible(false);
+    
     nextText.setVisible(false);
+    hintText.setVisible(true);
 
     //if QUIZZ not finished
     if (currentIndex < numberOfQuestions) {
@@ -78,7 +78,7 @@ function nextQuestion() {
         }
         //HINT SECTION TO DO
         //moreInfoCat.setVisible(true);
-        // hint.setVisible(true);
+        
         //this.scientistImage.setTexture('scientist' + currentIndex.toString());   
         // let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
         // this.bioHint.setText(justifiedBio); 
@@ -86,7 +86,10 @@ function nextQuestion() {
     }
     //if QUIZZ finished
     else if (currentIndex >= numberOfQuestions) {
+        
         removeGameAssets();
+        
+        subtitle.setText("Congratulations! You have finished the quiz!");
         scoreMessage.setText("Your score is " + score + "/" + numberOfQuestions)
   
     }

@@ -40,13 +40,18 @@ function create() {
     nextButton = this.add.image(config.width - 70, config.height / 2 + 65, 'playButton').setInteractive();
     // place the button that allows the player to switch to the next quesition
     nextButton.on('pointerdown', () => {nextQuestion();}); // attention, si tu ne passe rien en parametre, il ne faut pas mettre les parentheses (je ne comprend pas pourquoi)
+
+    hintCrystal = this.add.image(50, config.height / 2, 'crystalBall').setInteractive();
+    hintCrystal.on('pointerdown', () => {displayHint();});
+    hintCrystal.setScale(0.7);
+    
+    hintText = this.add.text(100, config.height / 2 + 35, "H\nI\nN\nT", nextStyle);
+    hintText.setOrigin(0.5, 0.5);
     
     nextButton.setScale(0.25);
-    //playButton.setVisible(false) //invisible tant que pas repondu
-    
     nextText = this.add.text(config.width - 70, config.height / 2 + 35, "N\nE\nX\nT", nextStyle);
-    
     nextText.setVisible(false);
+    
 
     //***DISPLAY CURRENT ANSWERS***
     answerList = questionJSON.questions[currentIndex].answer;
@@ -64,10 +69,13 @@ function create() {
         //Place the answers on the panels
         answerTextObject[i] = this.add.text(config.width/2,(config.height * 0.3)+ 40 + (80 *(i + 1)), answerList[i], answerStyle);
         answerTextObject[i].setColor(textColor);
-        answerTextObject[i].setOrigin(0.5, 0.5);}
+        answerTextObject[i].setOrigin(0.5, 0.5);
+    }
 
-        scoreMessage = this.add.text(config.width/2, config.height / 3 - 50, "", textStyle);
-        scoreMessage.setOrigin(0.5, 0.5);
+    
+    //**END OF GAME DISPLAY (empty for now) */
+    scoreMessage = this.add.text(config.width/2, config.height / 3 - 50, "", textStyle);
+    scoreMessage.setOrigin(0.5, 0.5);
     
     
 }

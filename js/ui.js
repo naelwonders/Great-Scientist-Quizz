@@ -13,8 +13,9 @@ let questionText;
 let nextText;
 let nextButton;
 let scoreMessage;
+let hintText;
 //let rectangle;
-//let hint, bioHint;
+//let bioHint;
 //let previousButton;
 
 // Colors & Fonts
