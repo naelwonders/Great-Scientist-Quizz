@@ -13,11 +13,16 @@ function preload() {
 
     //images and assets for the more info file page
     this.load.image('moreInfoCat', '../assets/Sprites/cat.png');
-    this.load.image('scientist0', '../assets/Sprites/curie.png');
-    this.load.image('scientist1', '../assets/Sprites/franklin.png');
-    this.load.image('scientist2', '../assets/Sprites/johnson.png');
-    this.load.image('scientist3', '../assets/Sprites/lovelace.png');
-    this.load.image('scientist4', '../assets/Sprites/lamarr.png');
+    this.load.image('curie', '../assets/Sprites/curie.png');
+    this.load.image('franklin', '../assets/Sprites/franklin.png');
+    this.load.image('johnson', '../assets/Sprites/johnson.png');
+    this.load.image('lovelace', '../assets/Sprites/lovelace.png');
+    this.load.image('lamarr', '../assets/Sprites/lamarr.png');
+    this.load.image('wu', '../assets/Sprites/wu.jpg');
+    this.load.image('kovalevskaya', '../assets/Sprites/kovalevskaya.jpg');
+    this.load.image('hypatia', '../assets/Sprites/hypatia.jpg');
+    this.load.image('mirzakhani', '../assets/Sprites/mirzakhani.jpg');
+    this.load.image('chatterjee', '../assets/Sprites/chatterjee.jpg');    
     
     //telecharger le fichier JSON
     this.load.json('questions', '/assets/data/Questions.json');

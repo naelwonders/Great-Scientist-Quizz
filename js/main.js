@@ -75,7 +75,7 @@ function create() {
     hintText.setOrigin(0.5, 0.5);
     //hintText.setVisible(false);
     
-    scientistImage = this.add.image(0,0,'scientist'+currentIndex.toString()); //
+    scientistImage = this.add.image(0,0,questionJSON.questions[currentIndex].image); //
     scientistImage.setOrigin(0,0);
     scientistImage.setVisible(false);
     

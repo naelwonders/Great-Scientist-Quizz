@@ -96,6 +96,7 @@ function nextQuestion() {
 }
 
 function displayHint(){
+    scientistImage.setTexture(questionJSON.questions[currentIndex].image);
     scientistImage.setVisible(true);
     rectangle.setVisible(true);
     previousButton.setVisible(true);
