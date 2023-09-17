@@ -96,11 +96,11 @@ function create() {
     previousButton.setVisible(false);
     
 
-    // this.bioHint = this.add.text((config.width/2) - (450) + 30, 450 + 30, '' ,
-    //     {fontFamily:        
-    //     textFont, 
-    //     fontSize: '20px', 
-    //     color: textColor}); 
+    bioHint = this.add.text(110, 450 + 20, '' ,
+         {fontFamily: 'Garamond', 
+         fontSize: '20px', 
+         color: textColor,
+         fontStyle: 'bold'}); 
      
     
     //**END OF GAME DISPLAY (empty for now) */

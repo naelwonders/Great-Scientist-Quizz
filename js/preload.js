@@ -21,7 +21,7 @@ function preload() {
     this.load.image('wu', '../assets/Sprites/wu.jpg');
     this.load.image('kovalevskaya', '../assets/Sprites/kovalevskaya.jpg');
     this.load.image('hypatia', '../assets/Sprites/hypatia.jpg');
-    this.load.image('mirzakhani', '../assets/Sprites/mirzakhani.jpg');
+    this.load.image('mirzakhani', '../assets/Sprites/mirzakhanis.jpg');
     this.load.image('chatterjee', '../assets/Sprites/chatterjee.jpg');    
     
     //telecharger le fichier JSON

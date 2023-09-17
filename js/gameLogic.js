@@ -100,6 +100,7 @@ function displayHint(){
     scientistImage.setVisible(true);
     rectangle.setVisible(true);
     previousButton.setVisible(true);
+    bioHint.setText(questionJSON.questions[currentIndex].bio);
     
 }
 
@@ -107,5 +108,5 @@ function removeHint(){
     scientistImage.setVisible(false);
     rectangle.setVisible(false);
     previousButton.setVisible(false);
-    
+    bioHint.setVisible(false);
 }

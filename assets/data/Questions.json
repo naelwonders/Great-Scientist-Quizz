@@ -12,57 +12,57 @@
             "answer": ["Dorothy Hodgkin", "Rosalind Franklin", "Barbara McClintock"],
             "goodAnswer": "Rosalind Franklin",
             "image" : "franklin",
-            "bio": "Emerging as a scientific force in the mid-20th century\nin England, this brilliant mind's mastery of X-ray crystallography\nunraveled the intricate structure of DNA's double helix. Beyond her\ngroundbreaking work on DNA, she also explored the structural\ncomplexities of viruses and other biological molecules. Despite her\npivotal contributions, her name was often obscured, yet her legacy\nendures in the realm of genetics and molecular biology."
+            "bio": "Emerging in mid-20th century England, this\nbrilliant mind's mastery of X-ray crystallography\nunraveled the intricate structure of DNA's double\nhelix. Despite her pivotal contributions, her name\nwas often obscured, yet her legacyendures in\nthe realm of genetics and molecular biology."
         },
         {
             "title": "Which mathematician's calculations were pivotal\nin launching the first American astronauts into\nspace?",
             "answer": ["Dorothy Vaughan", "Katherine Johnson", "Mary Jackson"],
             "goodAnswer": "Katherine Johnson",
             "image" : "johnson",
-            "bio": "A mathematical luminary of the 20th century,\nthis scientist's calculations were the unsung heroes behind\nthe success of the first American spaceflights. Their precise\nmathematical work ensured the trajectories of astronauts were\naccurate and safe, marking a significant milestone in space\nexploration. Amidst challenges, their contributions stood as a\ntestament to the power of determination and intellect, reshaping\nour understanding of the cosmos."
+            "bio": "This scientist's calculations were behind the\nsuccess of the first American spaceflights.\nTheir precise mathematical work ensured the\ntrajectories of astronauts were accurate and safe,\nmarking a significant milestone in space\nexploration."
         },
         {
-            "title": "Who  is  often  regarded  as the  world's  first\ncomputer  programmer? This, before the first\ncomputers emerged.",
+            "title": "Who  is  often  regarded  as the  world's  first\ncomputer  programmer (before the first\ncomputers emerged)?",
             "answer": ["Sophie Germain", "Grace Hopper", "Ada Lovelace"],
             "goodAnswer": "Ada Lovelace",
             "image" : "lovelace",
-            "bio": "Emerging in the 19th century England, this mathematician's\ninnovative insights transcended the boundaries of her time.\nCollaborating with Charles Babbage, she envisioned a machine\nthat could process not only numbers but also symbols and\ninstructions, laying the foundation for modern computer\nprogramming. Her visionary work opened a realm of possibilities,\ninfluencing generations of innovators to shape the digital age."
+            "bio": "In 19 century England, she envisioned a machine\nthat could process not only numbers but also\ninstructions, laying the foundation for modern\ncomputer programming. Her work opened a realm of\npossibilities, influencing innovators of the digital age."
         },
         {
             "title": "Who was a movie-star and the co-inventor of a\nfrequency-hopping system that laid the ground-\nwork for modern wireless technologies?",
             "answer": ["Hedy Lamarr", "Brigitte Bardot", "Audrey Hepburn"],
             "goodAnswer": "Hedy Lamarr",
             "image" : "lamarr",
-            "bio": "Born in 1914 in Austria, this multifaceted individual's\ningenuity extended beyond the silver screen. Collaborating with\na composer, she developed a frequency-hopping system to prevent\nradio-guided torpedoes from being jammed by enemies during World War II. This\ninvention, though initially overlooked, served as a precursor to\ntoday's technologies, including Bluetooth and Wi-Fi. A true visionary,\nshe demonstrated that brilliance could span diverse realms and\nforever shape the course of innovation."
+            "bio": "Born in 1914 in Austria, she helped develop a\nsystem to prevent radio-guided torpedoes from\nbeing jammed by enemies during World War II. This\ninvention, though initially overlooked, was\na precursor to today's technologies, including\nBluetooth and Wi-Fi."
 
         },
         {
-            "title": "Who  played  a  pivotal  role in confirming a\nfundamental theory in particle physics through a\ngroundbreaking experiment during the 20th century?",
+            "title": "Who  played  a  pivotal  role in confirming a fun-\ndamental theory in particle physics through a\ngroundbreaking experiment during the 20th century?",
             "answer": ["Chien-Shiung Wu", "Youyou Tu", "Shen Chun-shan"],
             "goodAnswer": "Chien-Shiung Wu",
             "image" : "wu",
-            "bio":  "A force in the realm of physics, this scientist's contribution\nto the field extended beyond the confines of her laboratory. Through\nher meticulous experiment, she provided crucial evidence for the\ntheory of weak interaction in particle physics, challenging conventional\nnorms. Her innovative methods and fearless pursuit of truth reshaped\nour understanding of fundamental forces, leaving an indelible mark\non the world of physics."
+            "bio":  "Through a meticulous experiment, she provided\ncrucial evidence for the theory of weak interaction\nin particle physics, challenging conventional norms.\nHer innovative methods and fearless pursuit of\ntruth reshaped our understanding of fundamental\nforces, leaving a mark on the world of physics."
         },
         {
             "title": "Which pioneering mathematician made significant\nadvancements in the field of partial differential\nequations?",
             "answer": ["Sofia Kovalevskaya", "Olga Ladyzhenskaya", "Lyudmila Keldysh"],
             "goodAnswer": "Sofia Kovalevskaya",
             "image" : "kovalevskaya",
-            "bio": "Born in 1850 in Russia, this mathematician made notable\ncontributions to mathematical analysis and was the first woman\nin Europe to receive a doctorate in mathematics."
+            "bio": "Born in 1850 in Russia, this mathematician made\nnotable contributions to mathematical analysis and\nwas the first woman in Europe to receive a doctorate\nin mathematics."
         },
         {
             "title": "Which scholar excelled in mathematics, astronomy,\nand philosophy, leaving an enduring legacy in the\nancient world?",
             "answer": ["Hypatia of Alexandria", "Trotula of Salerno", "Aglaonike"],
             "goodAnswer": "Hypatia of Alexandria",
             "image" : "hypatia",
-            "bio": "Born around 360 CE, this exceptional mind stood at the intersection\nof mathematics, astronomy, and philosophy. Her intellectual prowess\nchallenged societal norms, breaking through barriers to excel in\ntraditionally male-dominated fields. A symbol of wisdom and resilience,\nher legacy continues to inspire scholars and thinkers across the ages."
+            "bio": "Born around 360 CE, this exceptional mind\nchallenged societal norms, breaking through barriers to excel in\ntraditionally male-dominated fields. A symbol of wisdom and resilience,\nher legacy continues to inspire scholars and thinkers across the ages."
         },
         {
-            "title": "Who became the first recipient of the Fields\nMedal for achievements in the dynamics and\ngeometry of Riemann surfaces and their moduli spaces?",
+            "title": "Who became the first recipient of the Fields Medal\nfor achievements in the dynamics and geometry\nof Riemann surfaces and their moduli spaces?",
             "answer": ["Sameera Moussa", "Maryam Mirzakhani", "Nawal El Saadawi "],
             "goodAnswer": "Maryam Mirzakhani",
             "image" : "mirzakhani",
-            "bio": "Hailing from Iran, this mathematician's revolutionary\nwork in the fields of Riemann surfaces and their moduli\nspaces earned global recognition. The individual's deep insights\nand rigorous proofs in the realm of hyperbolic geometry, topology,\nand dynamics are a testament to their unparalleled mathematical prowess.\nTheir achievements have inspired countless scholars and reshaped\nthe understanding of complex geometric and dynamical systems."
+            "bio": "Born in Tehran in 1977, this mathematician\nmade significant contributions to Riemann surfaces,\nhyperbolic geometry, and topology. In 2014,\nshe became the first Iranian to win the Fields\nMedal. Sadly, her influential journey ended in 2017."
         },
         {
             "title": "Which scientist from Karnataka, India, was\ninstrumental in advancing the fields of microwave\nengineering and antennae research?",
