@@ -85,7 +85,7 @@ function create() {
     rectangle.fillStyle(0x000000, 1); // Set fill color to red, alpha 1
     // The arguments are (x, y, width, height, radius of the rounded edges)
     
-    rectangle.fillRoundedRect((config.width/2) - 200, 450, 450, 150, 20); //setOrigin does not work with rect so use the size of the rect to determine its position
+    rectangle.fillRoundedRect((config.width/2) - 225, 450, 450, 150, 20); //setOrigin does not work with rect so use the size of the rect to determine its position
     rectangle.setVisible(false);
     
     
@@ -97,7 +97,7 @@ function create() {
     previousButton.setVisible(false);
     
 
-    bioHint = this.add.text(110, 450 + 20, '' ,
+    bioHint = this.add.text(90, 460 , '' ,
          {fontFamily: 'Garamond', 
          fontSize: '20px', 
          color: textColor,

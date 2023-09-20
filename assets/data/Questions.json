@@ -5,35 +5,35 @@
             "answer": ["Marie Curie", "Lise Meitner", "Elzbieta Zawacka"],
             "goodAnswer": "Marie Curie",
             "image" : "curie",
-            "bio": "Born in Poland and emerging as a prominent\nfigure in the late 19th century, this scientist's profound\ninvestigations into radioactivity reshaped the field of atomic\nscience. Their groundbreaking discoveries not only laid the groundwork\nfor modern understandings of radiation but also earned them the\ndistinction of being a double Nobel laureate. Such a remarkable\nachievement underscores their dedication and transformative impact\non the world of science."
+            "bio": "Born in Poland, this scientist's profound invest-\nigations into radioactivity reshaped the field of\natomic science. Her groundbreaking discoveries\nnot only laid the groundwork for modern under-\nstandings of radiation but also earned them the\ndistinction of being a double Nobel laureate."
         },
         {
             "title": "Who made significant contributions to under-\nstanding molecular structures, including in\nuncovering the DNA double helix?",
             "answer": ["Dorothy Hodgkin", "Rosalind Franklin", "Barbara McClintock"],
             "goodAnswer": "Rosalind Franklin",
             "image" : "franklin",
-            "bio": "Emerging in mid-20th century England, this\nbrilliant mind's mastery of X-ray crystallography\nunraveled the intricate structure of DNA's double\nhelix. Despite her pivotal contributions, her name\nwas often obscured, yet her legacyendures in\nthe realm of genetics and molecular biology."
+            "bio": "Emerging in mid-20th century England, this\nbrilliant mind's mastery of X-ray crystallography\nunraveled the intricate structure of DNA's double\nhelix. Despite her pivotal contributions, her name\nwas often obscured, yet her legacyendures in the\nrealm of genetics and molecular biology."
         },
         {
             "title": "Which mathematician's calculations were pivotal\nin launching the first American astronauts into\nspace?",
             "answer": ["Dorothy Vaughan", "Katherine Johnson", "Mary Jackson"],
             "goodAnswer": "Katherine Johnson",
             "image" : "johnson",
-            "bio": "This scientist's calculations were behind the\nsuccess of the first American spaceflights.\nTheir precise mathematical work ensured the\ntrajectories of astronauts were accurate and safe,\nmarking a significant milestone in space\nexploration."
+            "bio": "This scientist's calculations were behind the suc-\ncess of the first American spaceflights. Her work\nensured the trajectories of astronauts were accu-\nrate and safe, marking a significant milestone in\nspace exploration. Her legacy is a testament to the\npower of math and determination in the face of\nchallenges."
         },
         {
             "title": "Who  is  often  regarded  as the  world's  first\ncomputer  programmer (before the first\ncomputers emerged)?",
             "answer": ["Sophie Germain", "Grace Hopper", "Ada Lovelace"],
             "goodAnswer": "Ada Lovelace",
             "image" : "lovelace",
-            "bio": "In 19 century England, she envisioned a machine\nthat could process not only numbers but also\ninstructions, laying the foundation for modern\ncomputer programming. Her work opened a realm of\npossibilities, influencing innovators of the digital age."
+            "bio": "In 19 century England, she envisioned a machine\nthat could process not only numbers but also\ninstructions, laying the foundation for modern\ncomputer programming. Her work opened a\nrealm of possibilities, influencing innovators\nof the digital age."
         },
         {
             "title": "Who was a movie-star and the co-inventor of a\nfrequency-hopping system that laid the ground-\nwork for modern wireless technologies?",
             "answer": ["Hedy Lamarr", "Brigitte Bardot", "Audrey Hepburn"],
             "goodAnswer": "Hedy Lamarr",
             "image" : "lamarr",
-            "bio": "Born in 1914 in Austria, she helped develop a\nsystem to prevent radio-guided torpedoes from\nbeing jammed by enemies during World War II. This\ninvention, though initially overlooked, was\na precursor to today's technologies, including\nBluetooth and Wi-Fi."
+            "bio": "Born in 1914 in Austria, she helped develop a\nsystem to prevent radio-guided torpedoes from\nbeing jammed by enemies during World War II.\nThis invention, though initially overlooked, was\na precursor to today's technologies, including\nBluetooth and Wi-Fi."
 
         },
         {
@@ -41,35 +41,35 @@
             "answer": ["Chien-Shiung Wu", "Youyou Tu", "Shen Chun-shan"],
             "goodAnswer": "Chien-Shiung Wu",
             "image" : "wu",
-            "bio":  "Through a meticulous experiment, she provided\ncrucial evidence for the theory of weak interaction\nin particle physics, challenging conventional norms.\nHer innovative methods and fearless pursuit of\ntruth reshaped our understanding of fundamental\nforces, leaving a mark on the world of physics."
+            "bio":  "Through a meticulous experiment, she provided\nevidence for the theory of weak interaction in\nparticle physics, challenging conventional norms.\nHer innovative methods and fearless pursuit of\ntruth reshaped our understanding of fundamental\nforces, leaving a mark on the world of physics."
         },
         {
             "title": "Which pioneering mathematician made significant\nadvancements in the field of partial differential\nequations?",
             "answer": ["Sofia Kovalevskaya", "Olga Ladyzhenskaya", "Lyudmila Keldysh"],
             "goodAnswer": "Sofia Kovalevskaya",
             "image" : "kovalevskaya",
-            "bio": "Born in 1850 in Russia, this mathematician made\nnotable contributions to mathematical analysis and\nwas the first woman in Europe to receive a doctorate\nin mathematics."
+            "bio": "Born in 1850 in Russia, this mathematician made\nnotable contributions to mathematical analysis.\nShe was the first woman in Europe to receive a\ndoctorate in mathematics,  breaking barriers for\nwomen in the field. Her work continues to inspire\nmathematicians today."
         },
         {
             "title": "Which scholar excelled in mathematics, astronomy,\nand philosophy, leaving an enduring legacy in the\nancient world?",
             "answer": ["Hypatia of Alexandria", "Trotula of Salerno", "Aglaonike"],
             "goodAnswer": "Hypatia of Alexandria",
             "image" : "hypatia",
-            "bio": "Born around 360 CE, this exceptional mind\nchallenged societal norms, breaking through barriers to excel in\ntraditionally male-dominated fields. A symbol of wisdom and resilience,\nher legacy continues to inspire scholars and thinkers across the ages."
+            "bio": "Born around 360 CE, this exceptional mind chal-\nlenged societal norms, breaking through barriers\nto excel in traditionally male-dominated fields. A\nsymbol of wisdom and resilience, her legacy\ncontinues to inspire scholars and thinkers across\nthe ages."
         },
         {
             "title": "Who became the first recipient of the Fields Medal\nfor achievements in the dynamics and geometry\nof Riemann surfaces and their moduli spaces?",
             "answer": ["Sameera Moussa", "Maryam Mirzakhani", "Nawal El Saadawi "],
             "goodAnswer": "Maryam Mirzakhani",
             "image" : "mirzakhani",
-            "bio": "Born in Tehran in 1977, this mathematician\nmade significant contributions to Riemann surfaces,\nhyperbolic geometry, and topology. In 2014,\nshe became the first Iranian to win the Fields\nMedal. Sadly, her influential journey ended in 2017."
+            "bio": "Born in Tehran in 1977, this mathematician made\nsignificant contributions to Riemann surfaces,\nhyperbolic geometry, and topology. In 2014, she\nbecame the first Iranian to win the Fields Medal.\nSadly, her influential journey ended in 2017."
         },
         {
             "title": "Which scientist from Karnataka, India, was\ninstrumental in advancing the fields of microwave\nengineering and antennae research?",
             "answer": ["Anandibai Joshi", "Rajeshwari Chatterjee", "Janaki Ammal"],
             "goodAnswer": "Rajeshwari Chatterjee",
             "image" : "chatterjee",
-            "bio": "Originating from the Indian state of Karnataka,\nthis engineer's pioneering work in microwave engineering\nhas had profound implications in communications and radar technology.\nTheir extensive research and innovative methodologies have greatly influenced\nthe design and understanding of antennae systems. Throughout their career,\nthe scientist emphasized the importance of education and served as\na beacon of inspiration in the engineering community."
+            "bio": "Originating from India, this engineer's pioneering\nwork in microwave engineering has had profound\nimplications in communications and radar techno-\nlogy. Her extensive research and innovative metho-\ndologies have greatly influenced the design and\nunderstanding of antennae systems."
         }
         
         
