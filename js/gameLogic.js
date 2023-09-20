@@ -59,7 +59,8 @@ function nextQuestion() {
     subtitle.setText("Quizz - Question " + (currentIndex + 1).toString());
     
     nextText.setVisible(false);
-    hintText.setVisible(true);
+    nextButton.setVisible(false);
+    //hintText.setVisible(false);
 
     //if QUIZZ not finished
     if (currentIndex < numberOfQuestions) {
@@ -101,6 +102,7 @@ function displayHint(){
     rectangle.setVisible(true);
     previousButton.setVisible(true);
     bioHint.setText(questionJSON.questions[currentIndex].bio);
+    bioHint.setVisible(true);
     
 }
 

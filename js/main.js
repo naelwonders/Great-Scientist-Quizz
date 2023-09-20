@@ -45,6 +45,7 @@ function create() {
     nextButton.setScale(0.25);
     nextText = this.add.text(config.width - 70, config.height / 2 + 35, "N\nE\nX\nT", nextStyle);
     nextText.setVisible(false);
+    nextButton.setVisible(false);
     
     
     //***DISPLAY CURRENT ANSWERS***

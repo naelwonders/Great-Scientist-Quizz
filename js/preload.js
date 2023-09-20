@@ -1,6 +1,5 @@
 function preload() {
     //attention un folder qui s'appelle Sprite ne marchera pas sur ichio (je sais pas pourquoi though)
-    //this.load.image('background', '../assets/Sprites/background.png');
     this.load.image('question', '../assets/Sprites/Label1.png');
     this.load.image('answer', '../assets/Sprites/tile.png');
     this.load.image('rightanswer', '../assets/Sprites/greenTile.png');
@@ -26,7 +25,5 @@ function preload() {
     
     //telecharger le fichier JSON
     this.load.json('questions', '/assets/data/Questions.json');
-
-    
-   
+      
 }
