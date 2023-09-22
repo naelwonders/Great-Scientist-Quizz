@@ -75,6 +75,51 @@ function create() {
     hintText = this.add.text(80, config.height - 80, "H I N T", nextStyle);
     hintText.setOrigin(0.5, 0.5);
     //hintText.setVisible(false);
+
+
+    // Fade out tween
+    function teleport() {
+        // Fade out tween
+        this.tweens.add({
+            targets: [hintCrystal, hintText],
+            alpha: 0,
+            duration: 1000,
+            onComplete: () => {
+                console.log('Fade Out Complete');
+                
+                // Change position
+                let randomX = Phaser.Math.Between(50, 600);
+                let randomY = Phaser.Math.Between(50, 550);
+                hintCrystal.setPosition(randomX, randomY);
+                hintText.setPosition(randomX,randomY);
+    
+                // Fade in tween
+                this.tweens.add({
+                    targets: [hintCrystal, hintText],
+                    alpha: 1,
+                    duration: 1000,
+                    onComplete: () => {
+                        console.log('Fade In Complete');
+                        
+                        // Call teleport again to create a loop
+                        teleport.call(this);
+                    }
+                });
+            }
+        });
+    }
+    
+    // Call teleport to start the loop
+    teleport.call(this);
+    
+
+
+    
+
+
+    moon = this.add.image(config.width/2, config.height *0.9, "moon");
+    moon.setScale(0.25);
+    moon.setAlpha(0.7);
     
     scientistImage = this.add.image(0,0,questionJSON.questions[currentIndex].image); //
     scientistImage.setOrigin(0,0);

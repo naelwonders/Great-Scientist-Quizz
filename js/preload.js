@@ -9,6 +9,7 @@ function preload() {
     this.load.image('playButton', '../assets/Sprites/cat.png');
     this.load.image('previousButton', '../assets/Sprites/cat.png');
     this.load.image('crystalBall', '../assets/Sprites/crystalBall2.png');
+    this.load.image('moon', '../assets/Sprites/moon.png');
 
     //images and assets for the more info file page
     this.load.image('moreInfoCat', '../assets/Sprites/cat.png');

@@ -17,6 +17,7 @@ let hintText;
 let scientistImage;
 let rectangle;
 let previousButton;
+let moon;
 //let bioHint;
 
 // Colors & Fonts

@@ -90,7 +90,8 @@ function nextQuestion() {
         
         removeGameAssets();
         
-        subtitle.setText("Congratulations! You have finished the quiz!");
+        subtitle.setText("All Done!");
+        //subtitle.setPosition()
         scoreMessage.setText("Your score is " + score + "/" + numberOfQuestions)
   
     }
