@@ -32,6 +32,9 @@ function getCurrentAnswerList() {
 
 
 function checkAnswer(answerText, answerIndex) {
+    
+    stars[currentIndex].setTexture("yellowstar");
+
     //logic if answer is right
     if (answerText == questionJSON.questions[currentIndex].goodAnswer) {
         //fists[currentIndex].alpha = 1;
@@ -42,6 +45,7 @@ function checkAnswer(answerText, answerIndex) {
     else {
         //fists[currentIndex].alpha = 0.3;
         answerPanel[answerIndex].setTexture("wronganswer");
+        stars[currentIndex].setAlpha(0.3);
     }
     //remove the interactiity of the panel so the player can choose only once
     for (let i = 0; i < 3; i++) {
@@ -50,6 +54,7 @@ function checkAnswer(answerText, answerIndex) {
     
     nextButton.setVisible(true);
     nextText.setVisible(true);
+    broom.setVisible(true);
     }
 
 
@@ -60,7 +65,7 @@ function nextQuestion() {
     
     nextText.setVisible(false);
     nextButton.setVisible(false);
-    //hintText.setVisible(false);
+    broom.setVisible(false);
 
     //if QUIZZ not finished
     if (currentIndex < numberOfQuestions) {
@@ -72,27 +77,27 @@ function nextQuestion() {
             questionJSON.questions[currentIndex].answer[2]];
         
         for (let i = 0; i < 3; i++) {
-            //remettre interactive car desactivé en checkant la réponse
             answerPanel[i].setTexture("answer");
             answerPanel[i].setInteractive();
             answerTextObject[i].setText(answerList[i]);
         }
-        //HINT SECTION TO DO
-        //moreInfoCat.setVisible(true);
-        
+            
         scientistImage.setTexture('scientist' + currentIndex.toString());
         // let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
         // this.bioHint.setText(justifiedBio); 
         // this.biohint.setVisible(false);        
     }
+    
     //if QUIZZ finished
     else if (currentIndex >= numberOfQuestions) {
         
         removeGameAssets();
         
         subtitle.setText("All Done!");
-        //subtitle.setPosition()
-        scoreMessage.setText("Your score is " + score + "/" + numberOfQuestions)
+        subtitle.setScale(1.8);
+        subtitle.setPosition(config.width / 2, config.height / 3)
+        
+        scoreMessage.setText("Your score is " + score + "/" + numberOfQuestions);
   
     }
 }

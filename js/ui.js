@@ -6,12 +6,14 @@ let answerPanel = [];
 let answerTextObject = [];
 let justifiedQuestion;
 let answerList;
-let fists = [];
+let stars = [];
+let star;
 let panel;
 let moreInfoCat;
 let questionText;
 let nextText;
 let nextButton;
+let broom;
 let scoreMessage;
 let hintText;
 let scientistImage;
@@ -32,7 +34,7 @@ let textFont = "Garamond";
 //texte pour la question et rep
 let titleStyle = {
     fontFamily: 'Old English Text MT', 
-    fontSize: 80, 
+    fontSize: 70, 
     fontStyle: 'bold',
     color: titleColor}
 
@@ -51,7 +53,7 @@ let textStyle = {
 
 let nextStyle = {   
     fontFamily: 'Garamond',
-    fontSize: 20,
+    fontSize: 15,
     fontStyle: 'bold',
     color: accentColor}
 
@@ -60,7 +62,11 @@ let answerStyle = {
     fontSize: 24, 
     color: textColor}
 
-
+let endGameStyle = {
+    fontFamily: 'Garamond',
+    fontSize: 40,
+    fontStyle: 'bold',
+    color: textColor}
     
 //ELEMENTS TO REMOVE WHEN GAME IS OVER
 function removeGameAssets(){
@@ -71,6 +77,10 @@ function removeGameAssets(){
     for (let i = 0; i < 3; i++) {
         answerTextObject[i].setVisible(false);
         answerPanel[i].setVisible(false);
+    }
+
+    for (let i = 0; i < numberOfQuestions; i++) {
+        stars[i].setVisible(false);
     }
 
     //remove other elements?

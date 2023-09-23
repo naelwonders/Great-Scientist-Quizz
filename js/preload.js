@@ -5,11 +5,13 @@ function preload() {
     this.load.image('rightanswer', '../assets/Sprites/greenTile.png');
     this.load.image('wronganswer', '../assets/Sprites/redTile.png');
 
-    this.load.image('fist', '../assets/Sprites/fist.png');
+    this.load.image('blackstar', '../assets/Sprites/blackstar.png');
+    this.load.image('yellowstar', '../assets/Sprites/yellowstar.png');
     this.load.image('playButton', '../assets/Sprites/cat.png');
-    this.load.image('previousButton', '../assets/Sprites/cat.png');
+    this.load.image('previousButton', '../assets/Sprites/PlayOFF.png');
     this.load.image('crystalBall', '../assets/Sprites/crystalBall2.png');
     this.load.image('moon', '../assets/Sprites/moon.png');
+    this.load.image('broom', '../assets/Sprites/broom.png');
 
     //images and assets for the more info file page
     this.load.image('moreInfoCat', '../assets/Sprites/cat.png');
