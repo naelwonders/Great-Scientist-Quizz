@@ -24,7 +24,15 @@ function preload() {
     this.load.image('kovalevskaya', '../assets/Sprites/kovalevskaya.jpg');
     this.load.image('hypatia', '../assets/Sprites/hypatia.jpg');
     this.load.image('mirzakhani', '../assets/Sprites/mirzakhanis.jpg');
-    this.load.image('chatterjee', '../assets/Sprites/chatterjee.jpg');    
+    this.load.image('chatterjee', '../assets/Sprites/chatterjee.jpg');  
+    
+    //Audio files preloaded
+    this.load.audio('applause', 'assets/Sound/applause.wav');
+    this.load.audio('cackle', 'assets/Sound/cackle.ogg');
+    this.load.audio('background', 'assets/Sound/background.ogg');
+    this.load.audio('sheep', 'assets/Sound/sheep.ogg');
+    
+    this.load.audio('meow', 'assets/Sound/meow.ogg');
     
     //telecharger le fichier JSON
     this.load.json('questions', '/assets/data/Questions.json');

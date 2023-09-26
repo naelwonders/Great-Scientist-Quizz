@@ -1,3 +1,14 @@
+//SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
+//play around with sounds, animations and tweens
+//look up the structure that you used here
+//event based game (no update)
+
+//TO DO:
+//fontFamily: 'Old English Text MT' not supported in all browsers
+//add juiciness (noises and visual effects)
+//add start page (with a tween on the play)
+//lazy finish page
+
 let config = {
     type: Phaser.AUTO,
     width: 600,
@@ -19,6 +30,13 @@ let game = new Phaser.Game(config);
 
 function create() {
     loadQuestionsFromJSON(this);
+
+    //**LOAD ALL SOUNDS***
+    backgroundSound = this.sound.add('background');
+    cackleSound = this.sound.add('cackle');
+    meowSound = this.sound.add('meow');
+    applauseSound = this.sound.add('applause');
+    sheepSound = this.sound.add('sheep');
 
     //***DISPLAY TITLE OF THE GAME***
     title = this.add.text(config.width / 2, 70, "Great Scientists", titleStyle);
@@ -46,7 +64,7 @@ function create() {
     
     
     //***DISPLAY CURRENT ANSWERS***
-    answerList = questionJSON.questions[currentIndex].answer;
+    answerList = shuffleArray(questionJSON.questions[currentIndex].answer);
     
     // Display panels and the answers in the list
     for (let i = 0; i < answerList.length; i++) {
@@ -143,7 +161,7 @@ function create() {
     //le bouton pour revenir à la question (sortir du hint)
     previousButton = this.add.image(80, 80, 'previousButton').setInteractive();
     previousButton.on('pointerdown', removeHint)
-    previousButton.setScale(0.5)
+    previousButton.setScale(0.4)
     //previousButton.setAngle(180);
     previousButton.setVisible(false);
 

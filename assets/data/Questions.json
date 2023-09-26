@@ -19,7 +19,7 @@
             "answer": ["Dorothy Vaughan", "Katherine Johnson", "Mary Jackson"],
             "goodAnswer": "Katherine Johnson",
             "image" : "johnson",
-            "bio": "Her calculations were behind the success of the\nfirst American spaceflights. Her work ensured\nthe trajectories of astronauts were accurate\nand safe, marking a significant milestone in space\nexploration. Her legacy is a testament to the\npower of math and determination in the face of\nchallenges."
+            "bio": "Her calculations were behind the success of the\nfirst American spaceflights. Her work ensured\nthe trajectories of astronauts were accurate and\nsafe, marking a significant milestone in space\nexploration. Her used the power of math and\ndetermination in the face of challenges."
         },
         {
             "title": "Who  is  often  regarded  as the  world's  first\ncomputer  programmer (before the first\ncomputers emerged)?",
@@ -37,7 +37,7 @@
 
         },
         {
-            "title": "Who  played  a  pivotal  role in confirming a fun-\ndamental theory in particle physics through a\ngroundbreaking experiment during the 20th century?",
+            "title": "Who helped confirm a fundamental theory in\nparticle physics through a groundbreaking ex-\nperiment during the early 20th century?",
             "answer": ["Chien-Shiung Wu", "Youyou Tu", "Shen Chun-shan"],
             "goodAnswer": "Chien-Shiung Wu",
             "image" : "wu",
@@ -69,7 +69,7 @@
             "answer": ["Anandibai Joshi", "Rajeshwari Chatterjee", "Janaki Ammal"],
             "goodAnswer": "Rajeshwari Chatterjee",
             "image" : "chatterjee",
-            "bio": "Originating from India, this engineer's pioneering\nwork in microwave engineering has had profound\nimplications in communications and radar techno-\nlogy. Her extensive research and innovative metho-\ndologies have greatly influenced the design and\nunderstanding of antennae systems."
+            "bio": "Originating from India, this engineer's work in\nmicrowave engineering profoundly impacted com-\nmunications and radar technology. Her research\nand innovative methods have significantly influ-\nenced the design and understanding of antennae\nsystems."
         }
         
         

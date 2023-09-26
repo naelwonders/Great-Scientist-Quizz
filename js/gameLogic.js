@@ -40,12 +40,14 @@ function checkAnswer(answerText, answerIndex) {
         //fists[currentIndex].alpha = 1;
         answerPanel[answerIndex].setTexture("rightanswer");
         score += 1;
+        meowSound.play();
     }
     //logic if answer is wrong
     else {
         //fists[currentIndex].alpha = 0.3;
         answerPanel[answerIndex].setTexture("wronganswer");
         stars[currentIndex].setAlpha(0.3);
+        sheepSound.play();
     }
     //remove the interactiity of the panel so the player can choose only once
     for (let i = 0; i < 3; i++) {
@@ -71,11 +73,8 @@ function nextQuestion() {
     if (currentIndex < numberOfQuestions) {
         questionTextObject.setText(questionJSON.questions[currentIndex].title);
         
-        answerList = [
-            questionJSON.questions[currentIndex].answer[0],
-            questionJSON.questions[currentIndex].answer[1],
-            questionJSON.questions[currentIndex].answer[2]];
-        
+        answerList = shuffleArray(questionJSON.questions[currentIndex].answer);
+
         for (let i = 0; i < 3; i++) {
             answerPanel[i].setTexture("answer");
             answerPanel[i].setInteractive();
@@ -92,7 +91,7 @@ function nextQuestion() {
     else if (currentIndex >= numberOfQuestions) {
         
         removeGameAssets();
-        
+        applauseSound.play();
         subtitle.setText("All Done!");
         subtitle.setScale(1.8);
         subtitle.setPosition(config.width / 2, config.height / 3)
@@ -103,6 +102,7 @@ function nextQuestion() {
 }
 
 function displayHint(){
+    cackleSound.play();
     scientistImage.setTexture(questionJSON.questions[currentIndex].image);
     scientistImage.setVisible(true);
     rectangle.setVisible(true);

@@ -20,6 +20,7 @@ let scientistImage;
 let rectangle;
 let previousButton;
 let moon;
+let backgroundSound, cackleSound, meowSound, applauseSound, sheepSound;
 //let bioHint;
 
 // Colors & Fonts
