@@ -12,6 +12,7 @@ function preload() {
     this.load.image('crystalBall', '../assets/Sprites/crystalBall2.png');
     this.load.image('moon', '../assets/Sprites/moon.png');
     this.load.image('broom', '../assets/Sprites/broom.png');
+    this.load.image('cauldron', '../assets/Sprites/cauldron.png');
 
     //images and assets for the more info file page
     this.load.image('moreInfoCat', '../assets/Sprites/cat.png');

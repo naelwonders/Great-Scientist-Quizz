@@ -87,6 +87,7 @@ function removeGameAssets(){
     //remove other elements?
     hintCrystal.setVisible(false);
     hintText.setVisible(false);
+    subtitle.setVisible(false);
 }
 
 // //this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine

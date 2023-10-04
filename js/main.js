@@ -3,11 +3,7 @@
 //look up the structure that you used here
 //event based game (no update)
 
-//TO DO:
 //fontFamily: 'Old English Text MT' not supported in all browsers
-//add juiciness (noises and visual effects)
-//add start page (with a tween on the play)
-//lazy finish page
 
 let config = {
     type: Phaser.AUTO,
@@ -27,9 +23,11 @@ let config = {
 
 let game = new Phaser.Game(config);
 
+//***PRELOAD all game assets in preload.js ***/
 
 function create() {
-    loadQuestionsFromJSON(this);
+    //Get all the the elements from the JSON
+    getQuestionsFromJSON(this);
 
     //**LOAD ALL SOUNDS***
     backgroundSound = this.sound.add('background');
@@ -171,9 +169,13 @@ function create() {
          color: textColor,
          fontStyle: 'bold'}); 
     
-    //**END OF GAME DISPLAY:score
-    scoreMessage = this.add.text(config.width/2, config.height / 3 - 50, "", endGameStyle);
-    scoreMessage.setPosition(config.width / 2, config.height / 3 * 1.8);
+         
+    //**END OF GAME DISPLAY:score && cauldron
+    cauldron = this.add.image(config.width/2, config.height/2 + 30, 'cauldron');
+    cauldron.setVisible(false);
+    
+    scoreMessage = this.add.text(config.width/2, config.height / 2 + 30, "", endGameStyle);
+    //scoreMessage.setPosition(config.width / 2, height/2 + 30);
     scoreMessage.setOrigin(0.5, 0.5);
     
 }

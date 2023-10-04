@@ -3,7 +3,7 @@ let numberOfQuestions;
 let currentIndex = 0;
 let score = 0;
 
-function loadQuestionsFromJSON(context){
+function getQuestionsFromJSON(context){
     
     // faire le lien avec le fichier JSON et cette page (on a deja preloadé dans preload)
     questionJSON = context.cache.json.get('questions');
@@ -92,7 +92,7 @@ function nextQuestion() {
         
         removeGameAssets();
         applauseSound.play();
-        subtitle.setText("All Done!");
+        cauldron.setVisible(true);
         subtitle.setScale(1.8);
         subtitle.setPosition(config.width / 2, config.height / 3)
         
