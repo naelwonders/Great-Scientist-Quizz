@@ -3,7 +3,8 @@
 //look up the structure that you used here
 //event based game (no update)
 
-//fontFamily: 'Old English Text MT' not supported in all browsers
+//turn the sound off button functionnality
+//try one last time to justify then give it up for sammy the salmon
 
 let config = {
     type: Phaser.AUTO,
@@ -29,24 +30,25 @@ function create() {
     //Get all the the elements from the JSON
     getQuestionsFromJSON(this);
 
-    //**LOAD ALL SOUNDS***
+    //**CREATE ALL SOUNDS***
     backgroundSound = this.sound.add('background');
     cackleSound = this.sound.add('cackle');
     meowSound = this.sound.add('meow');
     applauseSound = this.sound.add('applause');
     sheepSound = this.sound.add('sheep');
 
-    //***DISPLAY TITLE OF THE GAME***
-    title = this.add.text(config.width / 2, 70, "Great Scientists", titleStyle);
+    //***CREATE TITLE OF THE GAME***
+    title = this.add.text(config.width / 2, 70, "Great Fcientists", titleStyle);
     title.setOrigin(0.5, 0.5);
 
-    subtitle = this.add.text(config.width / 2, 120, "Quizz - Question " + (currentIndex + 1).toString() + "", subStyle);
+    subtitle = this.add.text(config.width / 2, 127, "Quizz - Question " + (currentIndex + 1).toString() + "", subStyle);
     subtitle.setOrigin(0.5, 0.5);
 
-    //***PROGRESS BAR***/
+    //***PROGRESS BAR MADE OF STARS***/
     for (let i = 0; i < numberOfQuestions; i++) {
-        star = this.add.image((config.width / 5)+ 45+ (i * 30), 160, 'blackstar');
-        star.setScale(0.01);
+        star = this.add.image((config.width / 5)+ 70 + (i * 25), 160, 'blackstar');
+        star.setScale(0.007);
+        star.setOrigin(0.5, 0.5);
         //star.alpha = 0;
         stars[i] = star;
     }
@@ -58,7 +60,6 @@ function create() {
     //let justifiedText = justifyText(, sizeTextObject);
 
     questionTextObject.setText(questionJSON.questions[currentIndex].title);
-
     
     
     //***DISPLAY CURRENT ANSWERS***
@@ -80,6 +81,7 @@ function create() {
         answerTextObject[i].setOrigin(0.5, 0.5);
     }
     
+    
     //*** BUTTON TO ACCESS THE NEXT QUESTION (2 SPRITES + TEXT) ***/
     //Playbutton set interactive to the nextQuestion function
     nextButton = this.add.image(config.width - 80, config.height / 2 + 80, 'playButton').setInteractive();
@@ -87,17 +89,18 @@ function create() {
     nextButton.on('pointerdown', () => {nextQuestion();}); // attention, si tu ne passe rien en parametre, il ne faut pas mettre les parentheses
     nextButton.setScale(0.2);
     nextButton.setVisible(false);
-
+    
     broom = this.add.image(config.width - 95, config.height / 2 + 125, 'broom');
     broom.setScale(0.25);
     broom.setVisible(false);
 
     nextText = this.add.text(config.width - 80, config.height / 2 + 52, "N\nE\nX\nT", nextStyle);
     nextText.setVisible(false);
+
     
     moon = this.add.image(config.width/2, config.height *0.9, "moon");
     moon.setScale(0.2);
-    moon.setAlpha(0.7);
+    moon.setAlpha(0.95);
     
     //*** BUTTON TO REACH THE HINT SECTION ***/
     hintCrystal = this.add.image(80, config.height - 80, 'crystalBall').setInteractive();
@@ -164,11 +167,16 @@ function create() {
     previousButton.setVisible(false);
 
     bioHint = this.add.text(90, 460 , '' ,
-         {fontFamily: 'Garamond', 
-         fontSize: '20px', 
-         color: textColor,
-         fontStyle: 'bold'}); 
+    {fontFamily: 'Garamond', 
+    fontSize: '20px', 
+    color: textColor,
+    fontStyle: 'bold'}); 
     
+    //***BUTTON TO TURN ON OR OFF THE SOUNDS** */
+    soundButton = this.add.image(35, config.height - 35, 'soundOn');
+    soundButton.setOrigin(0.5, 0.5);
+    soundButton.setScale(0.2);
+    soundButton.setAlpha(0.7);
          
     //**END OF GAME DISPLAY:score && cauldron
     cauldron = this.add.image(config.width/2, config.height/2 + 30, 'cauldron');

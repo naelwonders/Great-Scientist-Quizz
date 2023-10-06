@@ -8,6 +8,7 @@ function preload() {
     this.load.image('blackstar', '../assets/Sprites/blackstar.png');
     this.load.image('yellowstar', '../assets/Sprites/yellowstar.png');
     this.load.image('playButton', '../assets/Sprites/cat.png');
+    this.load.image('soundOn', '../assets/Sprites/soundOn.png');
     this.load.image('previousButton', '../assets/Sprites/PlayOFF.png');
     this.load.image('crystalBall', '../assets/Sprites/crystalBall2.png');
     this.load.image('moon', '../assets/Sprites/moon.png');

@@ -21,6 +21,7 @@ let rectangle;
 let previousButton;
 let moon;
 let backgroundSound, cackleSound, meowSound, applauseSound, sheepSound;
+let soundButton;
 //let bioHint;
 
 // Colors & Fonts
@@ -34,21 +35,21 @@ let textFont = "Garamond";
 
 //texte pour la question et rep
 let titleStyle = {
-    fontFamily: 'Old English Text MT', 
-    fontSize: 70, 
+    fontFamily: 'UnifrakturMaguntia', 
+    fontSize: 77, 
     fontStyle: 'bold',
     color: titleColor}
 
 let subStyle = {
-    fontFamily: 'Old English Text MT', 
-    fontSize: 40, 
+    fontFamily: 'Garamond', 
+    fontSize: 35, 
     fontStyle: 'bold',
     color: titleColor}
 
 let textStyle = {
     fontFamily: 'Garamond',
-    fontSize: 24,
-    fontStyle: 'bold',
+    fontSize: 25,
+    //fontStyle: 'bold',
     color: textColor}
 
 
@@ -68,6 +69,17 @@ let endGameStyle = {
     fontSize: 40,
     fontStyle: 'bold',
     color: textColor}
+
+// ***LOAD FONT *** Ensure the font is loaded before creating text
+WebFont.load({
+    google: {
+        families: ['UnifrakturMaguntia']
+    },
+    active: () => {
+        var googleFont = 'UnifrakturMaguntia';
+        //this.add.text(100, 100, "Hello, World!", style);
+    }
+});
     
 //ELEMENTS TO REMOVE WHEN GAME IS OVER
 function removeGameAssets(){
