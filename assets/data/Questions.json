@@ -65,7 +65,7 @@
             "bio": "Born in Tehran in 1977, this mathematician made\nsignificant contributions to Riemann surfaces,\nhyperbolic geometry, and topology. In 2014, she\nbecame the first Iranian to win the Fields Medal.\nSadly, her influential journey ended in 2017."
         },
         {
-            "title": "Which scientist from Karnataka, India, was\ninstrumental in advancing the fields of microwave\nengineering and antennae research?",
+            "title": "Which scientist from Karnataka, India, was instru-\nmental in advancing the fields of microwave\nengineering and antennae research?",
             "answer": ["Anandibai Joshi", "Rajeshwari Chatterjee", "Janaki Ammal"],
             "goodAnswer": "Rajeshwari Chatterjee",
             "image" : "chatterjee",

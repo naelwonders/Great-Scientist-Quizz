@@ -77,9 +77,9 @@ WebFont.load({
     },
     active: () => {
         var googleFont = 'UnifrakturMaguntia';
-        //this.add.text(100, 100, "Hello, World!", style);
     }
 });
+
     
 //ELEMENTS TO REMOVE WHEN GAME IS OVER
 function removeGameAssets(){
@@ -101,58 +101,3 @@ function removeGameAssets(){
     hintText.setVisible(false);
     subtitle.setVisible(false);
 }
-
-// //this is a computationnally heavy and imperfect method for justification of text, but considering the scope of the project, this methods will do just fine
-// function justifyText(context,text){
-//     const words = text.split(' ');
-//     let space = " "
-//     let currentLine = words[0];
-//     let justifiedText = "";
-//     let maxWidth = config.width - 100;
-
-//     //ICI BEUFFF
-//     let textObject = context.add.text(50, config.height / 3 - 50, " ", textStyle);
-    
-//     //to get the size of a space of the gameobject
-//     textObject.setText(' ');
-//     const spaceWidth = textObject.width;
-    
-//     for (let i = 1; i < words.length; i++) {
-//         let potentialLine = currentLine + space + words[i];
-//         textObject.setText(potentialLine);
-        
-//         if (textObject.width <= maxWidth) {
-//             currentLine = potentialLine;
-//         } 
-//         else {
-//             textObject.setText(currentLine)
-//             let extraSpacePixels = maxWidth - textObject.width; 
-            
-//             let numSpacesInLine = currentLine.split(' ').length - 1;
-//             let spacesToAdd = Math.floor(extraSpacePixels / (spaceWidth * numSpacesInLine));
-//             let remainingSpaces = extraSpacePixels - (spacesToAdd * spaceWidth * numSpacesInLine);
-            
-//             let newWords = currentLine.split(' ');
-            
-//             currentLine = newWords[0];
-//             for (let j = 1; j < newWords.length; j++) {
-//                 let additionalSpace = spacesToAdd;
-//                 if (remainingSpaces > 0) {
-//                     additionalSpace++;
-//                     remainingSpaces -= spaceWidth;
-//                 }
-//                 currentLine += ' '.repeat(1 + additionalSpace) + newWords[j];
-//             }
-            
-//             justifiedText += currentLine + "\n";
-//             //return a chain on characters with the added spaces
-//             currentLine = words[i];
-//         }
-//     }
-//     justifiedText += currentLine;  // add the last line
-    
-    
-//     return justifiedText;
-// }
-
-

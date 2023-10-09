@@ -1,10 +1,6 @@
 //SMALL PROJECT IN MY LEARNING JOURNEY (add learning objectives)
-//play around with sounds, animations and tweens
-//look up the structure that you used here
-//event based game (no update)
-
-//turn the sound off button functionnality
-//try one last time to justify then give it up for sammy the salmon
+//eventdriven architecture
+//first trial at refactoring code into multiple files
 
 let config = {
     type: Phaser.AUTO,
@@ -17,55 +13,48 @@ let config = {
     scene: {
         preload: preload,
         create: create
-        //update: update I removed this part because I do not need and upsate for this part
+        //update: update I removed this part because I do not need it (event based program)
     },
     autoCenter: true
 };
 
 let game = new Phaser.Game(config);
 
-//***PRELOAD all game assets in preload.js ***/
+//*** PRELOAD all game assets in preload.js ***/
 
 function create() {
     //Get all the the elements from the JSON
     getQuestionsFromJSON(this);
 
-    //**CREATE ALL SOUNDS***
+    //*** CREATE ALL SOUNDS ***
     backgroundSound = this.sound.add('background');
     cackleSound = this.sound.add('cackle');
     meowSound = this.sound.add('meow');
     applauseSound = this.sound.add('applause');
     sheepSound = this.sound.add('sheep');
 
-    //***CREATE TITLE OF THE GAME***
-    title = this.add.text(config.width / 2, 70, "Great Fcientists", titleStyle);
+    //*** CREATE TITLE & SUBTITLE OF THE GAME ***
+    title = this.add.text(config.width / 2, 70, "Great scientists", titleStyle);
     title.setOrigin(0.5, 0.5);
 
-    subtitle = this.add.text(config.width / 2, 127, "Quizz - Question " + (currentIndex + 1).toString() + "", subStyle);
+    subtitle = this.add.text(config.width / 2, 127, "Quizz - question " + (currentIndex + 1).toString() + "", subStyle);
     subtitle.setOrigin(0.5, 0.5);
 
-    //***PROGRESS BAR MADE OF STARS***/
+    //*** PROGRESS BAR MADE OF STARS ***/
     for (let i = 0; i < numberOfQuestions; i++) {
         star = this.add.image((config.width / 5)+ 70 + (i * 25), 160, 'blackstar');
         star.setScale(0.007);
         star.setOrigin(0.5, 0.5);
-        //star.alpha = 0;
         stars[i] = star;
     }
 
-    //***DISPLAY CURRENT QUESTION***
+    //*** DISPLAY CURRENT QUESTION ***
     questionTextObject = this.add.text(55, config.height / 3 - 25, " ", textStyle);
-    
-    sizeTextObject = questionTextObject.width;
-    //let justifiedText = justifyText(, sizeTextObject);
-
     questionTextObject.setText(questionJSON.questions[currentIndex].title);
     
-    
-    //***DISPLAY CURRENT ANSWERS***
+    //*** DISPLAY CURRENT ANSWERS ***
     answerList = shuffleArray(questionJSON.questions[currentIndex].answer);
     
-    // Display panels and the answers in the list
     for (let i = 0; i < answerList.length; i++) {
         
         //Place the planel and make it interactive to checkAnswer(answer, index)
@@ -81,12 +70,11 @@ function create() {
         answerTextObject[i].setOrigin(0.5, 0.5);
     }
     
-    
     //*** BUTTON TO ACCESS THE NEXT QUESTION (2 SPRITES + TEXT) ***/
     //Playbutton set interactive to the nextQuestion function
     nextButton = this.add.image(config.width - 80, config.height / 2 + 80, 'playButton').setInteractive();
     
-    nextButton.on('pointerdown', () => {nextQuestion();}); // attention, si tu ne passe rien en parametre, il ne faut pas mettre les parentheses
+    nextButton.on('pointerdown', () => {nextQuestion();}); 
     nextButton.setScale(0.2);
     nextButton.setVisible(false);
     
@@ -151,34 +139,40 @@ function create() {
     scientistImage.setVisible(false);
     
     rectangle = this.add.graphics();
-    // Draw a rectangle shape using the fill style
     rectangle.fillStyle(0x000000, 1); // Set fill color to red, alpha 1
     // The arguments are (x, y, width, height, radius of the rounded edges)
     
-    rectangle.fillRoundedRect((config.width/2) - 225, 450, 450, 150, 20); //setOrigin does not work with rect so use the size of the rect to determine its position
+    rectangle.fillRoundedRect((config.width/2) - 225, 450, 450, 150, 20);
     rectangle.setVisible(false);
     
     
-    //le bouton pour revenir à la question (sortir du hint)
+    //*** BUTTON TO GET BACK TO THE QUESTION ***/
     previousButton = this.add.image(80, 80, 'previousButton').setInteractive();
-    previousButton.on('pointerdown', removeHint)
-    previousButton.setScale(0.4)
-    //previousButton.setAngle(180);
+    previousButton.on('pointerdown', removeHint);
+    previousButton.setScale(0.4);
     previousButton.setVisible(false);
 
     bioHint = this.add.text(90, 460 , '' ,
-    {fontFamily: 'Garamond', 
-    fontSize: '20px', 
-    color: textColor,
-    fontStyle: 'bold'}); 
+            {fontFamily: 'Garamond', 
+            fontSize: '20px', 
+            color: textColor,
+            fontStyle: 'bold'
+            }
+        ); 
     
-    //***BUTTON TO TURN ON OR OFF THE SOUNDS** */
-    soundButton = this.add.image(35, config.height - 35, 'soundOn');
+    //*** BUTTON TO TURN ON OR OFF THE SOUNDS ** */
+    soundButton = this.add.image(35, config.height - 35, 'soundOn').setInteractive();
     soundButton.setOrigin(0.5, 0.5);
     soundButton.setScale(0.2);
-    soundButton.setAlpha(0.7);
+    soundButton.setAlpha(this.sound.mute ? 0.4 : 0.7);
+    soundButton.on('pointerdown', () => {
+        // Inversez l'état mute du son
+        this.sound.mute = !this.sound.mute;
+        // Ajustez l'alpha pour indiquer si le son est activé ou désactivé
+        soundButton.setAlpha(this.sound.mute ? 0.3 : 0.7);
+    });
          
-    //**END OF GAME DISPLAY:score && cauldron
+    //*** END OF GAME DISPLAY:score && cauldron ***
     cauldron = this.add.image(config.width/2, config.height/2 + 30, 'cauldron');
     cauldron.setVisible(false);
     
