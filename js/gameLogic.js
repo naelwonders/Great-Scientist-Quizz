@@ -1,7 +1,3 @@
-let questionJSON;
-let numberOfQuestions;
-let currentIndex = 0;
-let score = 0;
 
 function getQuestionsFromJSON(context){
     
@@ -61,16 +57,20 @@ function checkAnswer(answerText, answerIndex) {
 
 
 function nextQuestion() {
+    //we increase the currentIndex to display the next question from the JSON
     currentIndex ++;
 
     subtitle.setText("Quizz - Question " + (currentIndex + 1).toString());
     
+    //remove the next button until checkAnswer
     nextText.setVisible(false);
     nextButton.setVisible(false);
     broom.setVisible(false);
 
-    //if QUIZZ not finished
+    //what happens when the QUIZZ is not finished: 
     if (currentIndex < numberOfQuestions) {
+        
+        // 1. the next question & answers are displayed (text and panel)
         questionTextObject.setText(questionJSON.questions[currentIndex].title);
         
         answerList = shuffleArray(questionJSON.questions[currentIndex].answer);
@@ -80,41 +80,17 @@ function nextQuestion() {
             answerPanel[i].setInteractive();
             answerTextObject[i].setText(answerList[i]);
         }
-            
-        scientistImage.setTexture('scientist' + currentIndex.toString());
-        // let justifiedBio = justifyText(this.bioHint, questionJSON.questions[currentIndex].bio, rectangle.with - 40)
-        // this.bioHint.setText(justifiedBio); 
-        // this.biohint.setVisible(false);        
+        
+        //2. adapt the scientist image
+        scientistImage.setTexture('scientist' + currentIndex.toString());     
     }
     
-    //if QUIZZ finished
+    //if QUIZZ finished: display end game assets
     else if (currentIndex >= numberOfQuestions) {
-        
-        removeGameAssets();
         applauseSound.play();
-        cauldron.setVisible(true);
-        subtitle.setScale(1.8);
-        subtitle.setPosition(config.width / 2, config.height / 3)
-        
-        scoreMessage.setText("Your score is " + score + "/" + numberOfQuestions);
-  
+        removeGameAssets();
+        displayEndGameAssets()
     }
 }
 
-function displayHint(){
-    cackleSound.play();
-    scientistImage.setTexture(questionJSON.questions[currentIndex].image);
-    scientistImage.setVisible(true);
-    rectangle.setVisible(true);
-    previousButton.setVisible(true);
-    bioHint.setText(questionJSON.questions[currentIndex].bio);
-    bioHint.setVisible(true);
-    
-}
 
-function removeHint(){
-    scientistImage.setVisible(false);
-    rectangle.setVisible(false);
-    previousButton.setVisible(false);
-    bioHint.setVisible(false);
-}

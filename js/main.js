@@ -22,7 +22,37 @@ let game = new Phaser.Game(config);
 
 //*** PRELOAD all game assets in preload.js ***/
 
+//--INITIALISATION DE TOUTES LES VARIABLES
+let title;
+let questionTextObject;
+let questionText;
+let answerTextObject = [];
+let answerPanel = [];
+let answerList;
+let panel;
+let stars = [];
+let star;
+let moon;
+let broom;
+let moreInfoCat;
+let nextText;
+let nextButton;
+let previousButton;
+let hintText;
+let scientistImage;
+let rectangle;
+
+let soundButton;
+let backgroundSound, cackleSound, meowSound, applauseSound, sheepSound;
+
+let questionJSON = [];
+let numberOfQuestions;
+let currentIndex = 0;
+let scoreMessage;
+let score = 0;
+
 function create() {
+
     //Get all the the elements from the JSON
     getQuestionsFromJSON(this);
 
@@ -34,7 +64,7 @@ function create() {
     sheepSound = this.sound.add('sheep');
 
     //*** CREATE TITLE & SUBTITLE OF THE GAME ***
-    title = this.add.text(config.width / 2, 70, "Great scientists", titleStyle);
+    title = this.add.text(config.width / 2, 70, "Wonderful Minds", titleStyle);
     title.setOrigin(0.5, 0.5);
 
     subtitle = this.add.text(config.width / 2, 127, "Quizz - question " + (currentIndex + 1).toString() + "", subStyle);
@@ -92,7 +122,7 @@ function create() {
     
     //*** BUTTON TO REACH THE HINT SECTION ***/
     hintCrystal = this.add.image(80, config.height - 80, 'crystalBall').setInteractive();
-    hintCrystal.on('pointerdown', () => {displayHint();});
+    hintCrystal.on('pointerdown', () => {displayHintAssets();});
     hintCrystal.setScale(0.35);
     
     hintText = this.add.text(80, config.height - 80, "H I N T", nextStyle);
@@ -148,7 +178,7 @@ function create() {
     
     //*** BUTTON TO GET BACK TO THE QUESTION ***/
     previousButton = this.add.image(80, 80, 'previousButton').setInteractive();
-    previousButton.on('pointerdown', removeHint);
+    previousButton.on('pointerdown', removeHintAssets);
     previousButton.setScale(0.4);
     previousButton.setVisible(false);
 
