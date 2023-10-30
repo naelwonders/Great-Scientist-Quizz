@@ -121,11 +121,11 @@ function create() {
     moon.setAlpha(0.95);
     
     //*** BUTTON TO REACH THE HINT SECTION ***/
-    hintCrystal = this.add.image(80, config.height - 80, 'crystalBall').setInteractive();
+    hintCrystal = this.add.image(80, config.height - 250, 'crystalBall').setInteractive();
     hintCrystal.on('pointerdown', () => {displayHintAssets();});
     hintCrystal.setScale(0.35);
     
-    hintText = this.add.text(80, config.height - 80, "H I N T", nextStyle);
+    hintText = this.add.text(80, config.height - 250, "H I N T", nextStyle);
     hintText.setOrigin(0.5, 0.5);
     
     // Fade out tween
@@ -177,9 +177,9 @@ function create() {
     
     
     //*** BUTTON TO GET BACK TO THE QUESTION ***/
-    previousButton = this.add.image(80, 80, 'previousButton').setInteractive();
+    previousButton = this.add.image(config.width - 80, 80, 'previousButton').setInteractive();
     previousButton.on('pointerdown', removeHintAssets);
-    previousButton.setScale(0.4);
+    previousButton.setScale(0.3);
     previousButton.setVisible(false);
 
     bioHint = this.add.text(90, 460 , '' ,

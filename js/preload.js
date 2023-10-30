@@ -9,7 +9,7 @@ function preload() {
     this.load.image('yellowstar', '../assets/Sprites/yellowstar.png');
     this.load.image('playButton', '../assets/Sprites/cat.png');
     this.load.image('soundOn', '../assets/Sprites/soundOn.png');
-    this.load.image('previousButton', '../assets/Sprites/PlayOFF.png');
+    this.load.image('previousButton', '../assets/Sprites/back.png');
     this.load.image('crystalBall', '../assets/Sprites/crystalBall2.png');
     this.load.image('moon', '../assets/Sprites/moon.png');
     this.load.image('broom', '../assets/Sprites/broom.png');
@@ -25,7 +25,7 @@ function preload() {
     this.load.image('wu', '../assets/Sprites/wu.jpg');
     this.load.image('kovalevskaya', '../assets/Sprites/kovalevskaya.jpg');
     this.load.image('hypatia', '../assets/Sprites/hypatia.jpg');
-    this.load.image('mirzakhani', '../assets/Sprites/mirzakhanis.jpg');
+    this.load.image('mirzakhani', '../assets/Sprites/mirzakhani.jpg');
     this.load.image('chatterjee', '../assets/Sprites/chatterjee.jpg');  
     
     //Audio files preloaded
