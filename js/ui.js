@@ -10,7 +10,7 @@ let textFont = "Garamond";
 
 //texte pour la question et rep
 let titleStyle = {
-    fontFamily: 'UnifrakturMaguntia', 
+    fontFamily: 'Garamond', 
     fontSize: 75, 
     fontStyle: 'bold',
     color: titleColor}
@@ -44,16 +44,6 @@ let endGameStyle = {
     fontSize: 40,
     fontStyle: 'bold',
     color: textColor}
-
-// ***LOAD FONT *** Ensure the font is loaded before creating text
-WebFont.load({
-    google: {
-        families: ['UnifrakturMaguntia']
-    },
-    active: () => {
-        var googleFont = 'UnifrakturMaguntia';
-    }
-});
 
 //ELEMENTS TO REMOVE WHEN GAME IS OVER
 function removeGameAssets(){
